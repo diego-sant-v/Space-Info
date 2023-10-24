@@ -3,7 +3,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1.
 
 # Sistema de Informações sobre o Espaço
-<img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fdasartes.com.br%2Fde-arte-a-z%2Fnasa-apresenta-as-fotos-mais-detalhadas-ja-tiradas-do-espaco-profundo%2F&psig=AOvVaw0r0h_c5OghHW0nXm-sdRtd&ust=1698236114681000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCKDqzNPUjoIDFQAAAAAdAAAAABAE">
+<img src="https://dasartes.com.br/dasartes.com.br/wp-content/uploads/2022/07/main_image_star-forming_region_carina_nircam_final-5mb-1024x593-1.jpeg">
 
 
 Bem-vindo ao Sistema de Informações sobre o Espaço! Este é um repositório que contém um sistema de informações sobre o espaço, onde você pode explorar dados e fatos fascinantes relacionados ao universo.
