@@ -1,0 +1,51 @@
+<div class="container-fluid">
+  <iframe src="https://mars.nasa.gov/gltf_embed/24584" width="100%" height="450px" frameborder="0"></iframe>
+  <div class="row">
+    <div class="col-md-6 div_btns_rover">
+      <mat-form-field class="mat-field-date">
+        <mat-label>Insira uma data</mat-label>
+        <input (dateChange)="dateSelected = $event.value" matInput [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Selecione a camerâ do rover</mat-label>
+        <mat-select (selectionChange)="typeCameraSelected = $event.value" [value]="typeCamera[5]">
+          <mat-option  *ngFor="let optionCamera of typeCamera" [value]="optionCamera">
+            {{optionCamera}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="col-md-6">
+        <button (click)="getRoverPhotos(dateSelected)" class="btn btn-success float-right">Procurar imagens</button>
+      </div>
+      
+    </div>
+    
+  </div>
+  
+  <!-- <model-viewer src="../../../assets/curiosity_static.glb" alt="VR Headset" auto-rotate camera-controls ar ios-src="../../../assets/curiosity_static.glb"></model-viewer> -->
+  <div class="row">
+    <div *ngIf="isLoading" class="div_spinner">
+      <mat-spinner class="loading-spinner"></mat-spinner>
+    </div>
+  </div>
+
+  <div *ngIf="roverPhotosInfo" class="row text-center d-flex justify-content-center">
+    <div class="card mb-3 col-md-5 div_card_bk" *ngFor="let roverInfo of roverPhotosInfo.photos">
+      <div>
+        <img class="card-img-top" [src]="roverInfo.img_src" alt="Card image cap">
+      </div>
+
+      <div class="card-body">
+        <h5 class="card-title">{{roverInfo.camera.full_name}}</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.
+          This content is a little bit longer.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+  </div>
+</div>

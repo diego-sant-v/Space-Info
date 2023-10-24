@@ -1,0 +1,28 @@
+.div_card_bk{
+    margin: 20px;
+    padding: 0px;
+}
+
+.div_search_asteroides{
+    float: right;
+    margin: 10px;
+    padding: 10px;
+}
+
+.div_search_asteroides > .btn{
+    margin-right: 20px;
+}
+
+.loading-spinner{
+    margin: auto;
+}
+
+.div_spinner{
+    display: flex;
+    height: 500px;
+}
+
+.div_infos > div > h3,
+.div_infos > div > h2{
+    display: inline-block;
+}

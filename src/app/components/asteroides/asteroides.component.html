@@ -1,0 +1,77 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="div_search_asteroides">
+          <button (click)="getAsteroidesByDate(startDateSelected, endDateSelected)" class="btn btn-success">Procurar asteroides</button>
+            <mat-form-field>
+                <mat-label>Insira um intervalo de 7 dias</mat-label>
+                <mat-date-range-input [rangePicker]="picker">
+                  <input (dateChange)="startDateSelected = $event.value"  matStartDate placeholder="Start date">
+                  <input (dateChange)="endDateSelected = $event.value" matEndDate placeholder="End date">
+                </mat-date-range-input>
+                <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div *ngIf="isLoading" class="div_spinner">
+      <mat-spinner class="loading-spinner"></mat-spinner>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-xxl-3 col-xl-4 col-sm-6" *ngFor="let asteroidesInfo of asteroidesNear">
+        <div class="card card div_card_bk">
+          <h5 class="card-header">{{asteroidesInfo.name}}</h5>
+          <div class="card-body">
+            <h1 class="card-title">Nome: {{asteroidesInfo.name}}</h1>
+            <div class="div_infos">
+              <h1>Informações da data de aproximação:</h1>
+              <div *ngFor="let dataApproch of asteroidesInfo.close_approach_data">
+                  <h2>Data de aproximação:</h2>
+                  <h3>{{dataApproch.close_approach_date | date: 'dd/MM/yyyy'}}</h3>
+
+                  <br>
+
+                  <h2>Distância(UA):</h2>
+                  <h3>{{dataApproch.miss_distance.astronomical}}</h3>
+
+                  <br>
+
+                  <h2>Velocidade Relativa(KM):</h2>
+                  <h3>{{dataApproch.relative_velocity.kilometers_per_hour}}</h3>
+
+                  <br>
+
+                  <h2>Corpo de Órbita:</h2>
+                  <h3>{{dataApproch.orbiting_body}}</h3>
+
+              </div>
+              
+              <div>
+                <h2>Magnitude Absoluta:</h2>
+                <h3>{{asteroidesInfo.absolute_magnitude_h}}</h3>
+              </div>
+              
+
+              <div>
+                <h2>Potencialmente danoso:</h2>
+                <h3>{{asteroidesInfo.is_potentially_hazardous_asteroid}}</h3>
+              </div>
+              
+              <div>
+                <h2>Monitoramento de impacto:</h2>
+                <h3>{{asteroidesInfo.is_sentry_object}}</h3>
+              </div>
+
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            </div>
+            
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+</div>
+
