@@ -51,7 +51,7 @@ export class EpicComponent implements OnInit {
         this.isLoading = false;
 
         if (this.epicImages.length === 0) {
-          this.showSnackbar('Nenhuma imagem disponível para esta data', 'OK');
+          this.showSnackbar('Nenhumsa imagem disponível para esta data', 'OK');
         } else {
           this.showSnackbar(`${this.epicImages.length} imagem(ns) encontrada(s)!`, 'OK');
         }
