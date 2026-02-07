@@ -1,28 +1,311 @@
-.div_card_bk{
-    margin: 20px;
-    padding: 0px;
+.asteroides-container {
+  min-height: calc(100vh - 70px);
+  padding: 2rem 0;
 }
 
-.div_search_asteroides{
-    float: right;
-    margin: 10px;
-    padding: 10px;
+.header-section {
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
-.div_search_asteroides > .btn{
-    margin-right: 20px;
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--star-white);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  
+  @media (max-width: 768px) {
+    font-size: 1.8rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 }
 
-.loading-spinner{
-    margin: auto;
+.title-icon {
+  font-size: 3rem;
+  animation: rotate 10s linear infinite;
+  
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+  }
 }
 
-.div_spinner{
-    display: flex;
-    height: 500px;
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.div_infos > div > h3,
-.div_infos > div > h2{
-    display: inline-block;
+.page-subtitle {
+  font-size: 1.1rem;
+  color: rgba(241, 241, 241, 0.8);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+  
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+}
+
+.search-section {
+  margin-bottom: 3rem;
+}
+
+.search-card {
+  background: rgba(22, 33, 62, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(123, 44, 191, 0.3);
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+  }
+}
+
+.date-range-picker {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.date-field {
+  width: 100%;
+}
+
+.hint-text {
+  text-align: center;
+  color: rgba(241, 241, 241, 0.7);
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.search-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.results-header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2rem;
+  
+  h3 {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, var(--nebula-purple) 0%, var(--space-blue) 100%);
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    box-shadow: 0 5px 20px rgba(123, 44, 191, 0.4);
+  }
+}
+
+.results-icon {
+  font-size: 1.5rem;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.content-section {
+  padding: 0 1rem;
+}
+
+.asteroid-card {
+  background: rgba(22, 33, 62, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(123, 44, 191, 0.3);
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(123, 44, 191, 0.5);
+    border-color: var(--nebula-purple);
+  }
+  
+  &.hazardous {
+    border-color: var(--highlight-color);
+    
+    .card-header-custom {
+      background: linear-gradient(135deg, rgba(233, 69, 96, 0.3) 0%, rgba(233, 69, 96, 0.1) 100%);
+      border-bottom-color: var(--highlight-color);
+    }
+  }
+}
+
+.card-header-custom {
+  background: linear-gradient(135deg, var(--accent-color) 0%, var(--secondary-color) 100%);
+  border-bottom: 2px solid var(--nebula-purple);
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.asteroid-name {
+  color: var(--star-white);
+  font-weight: 600;
+  font-size: 1rem;
+  margin: 0;
+  word-break: break-word;
+  flex: 1;
+}
+
+.danger-badge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  
+  &.dangerous {
+    background: linear-gradient(135deg, var(--highlight-color) 0%, #c23050 100%);
+    box-shadow: 0 3px 10px rgba(233, 69, 96, 0.4);
+  }
+  
+  &.safe {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    box-shadow: 0 3px 10px rgba(16, 185, 129, 0.4);
+  }
+}
+
+.card-body-custom {
+  padding: 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-section {
+  margin-bottom: 1.5rem;
+  
+  &:last-of-type {
+    margin-bottom: 1rem;
+  }
+}
+
+.section-title {
+  color: var(--nebula-purple);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(123, 44, 191, 0.3);
+}
+
+.info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.info-label {
+  color: rgba(241, 241, 241, 0.7);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.info-value {
+  color: var(--star-white);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.details-btn {
+  margin-top: auto;
+  width: 100%;
+  padding: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+// Material overrides
+::ng-deep {
+  .mat-mdc-form-field {
+    .mat-mdc-text-field-wrapper {
+      background: rgba(15, 52, 96, 0.5) !important;
+    }
+    
+    .mat-mdc-form-field-focus-overlay {
+      background-color: rgba(123, 44, 191, 0.1) !important;
+    }
+  }
+  
+  .mat-mdc-form-field-subscript-wrapper {
+    .mat-mdc-form-field-hint {
+      color: rgba(241, 241, 241, 0.6) !important;
+    }
+  }
+  
+  .mat-datepicker-content {
+    background: var(--secondary-color) !important;
+    color: var(--star-white) !important;
+  }
+  
+  .mat-calendar {
+    background: var(--secondary-color) !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .asteroid-card {
+    margin-bottom: 1rem;
+  }
+  
+  .card-header-custom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .danger-badge {
+    align-self: flex-start;
+  }
 }

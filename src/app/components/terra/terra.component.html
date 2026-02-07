@@ -1,1 +1,150 @@
-<p>terra works!</p>
+<div class="terra-container">
+  <div class="container-fluid">
+    <div class="row header-section">
+      <div class="col-12">
+        <h1 class="page-title">
+          <span class="title-icon">🌍</span>
+          Nosso Planeta Terra
+        </h1>
+        <p class="page-subtitle">
+          Conheça fatos fascinantes sobre nosso lar no universo - o único planeta conhecido que abriga vida.
+        </p>
+      </div>
+    </div>
+
+    <!-- Earth Image Section -->
+    <div class="row image-section">
+      <div class="col-12 col-lg-10 mx-auto">
+        <div class="earth-image-card">
+          <div class="image-banner">
+            <img 
+              src="https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=1200&h=600&fit=crop" 
+              alt="Planeta Terra vista do espaço"
+              class="earth-banner-img"
+              loading="lazy">
+            <div class="image-overlay">
+              <h2 class="overlay-title">🌎 O Planeta Azul</h2>
+              <p class="overlay-text">A joia do Sistema Solar</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Earth Facts Section -->
+    <div class="row facts-section">
+      <div class="col-12">
+        <h2 class="section-title">
+          <span class="section-icon">📊</span>
+          Dados Interessantes
+        </h2>
+      </div>
+      
+      <div class="col-12 col-sm-6 col-md-4 col-xl-3" *ngFor="let fact of earthFacts">
+        <div class="fact-card">
+          <div class="fact-icon">{{ fact.icon }}</div>
+          <h3 class="fact-title">{{ fact.title }}</h3>
+          <div class="fact-value">{{ fact.value }}</div>
+          <p class="fact-description">{{ fact.description }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Earth Layers Section -->
+    <div class="row layers-section">
+      <div class="col-12">
+        <h2 class="section-title">
+          <span class="section-icon">🧩</span>
+          Camadas da Terra
+        </h2>
+      </div>
+
+      <div class="col-12 col-lg-10 mx-auto">
+        <div class="layers-container">
+          <div class="layer-card" *ngFor="let layer of earthLayers; let i = index">
+            <div class="layer-visual" [style.background]="layer.color">
+              <span class="layer-number">{{ i + 1 }}</span>
+            </div>
+            <div class="layer-info">
+              <h4 class="layer-name">{{ layer.name }}</h4>
+              <div class="layer-depth">📏 {{ layer.depth }}</div>
+              <p class="layer-description">{{ layer.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fun Facts Section -->
+    <div class="row fun-facts-section">
+      <div class="col-12 col-lg-10 mx-auto">
+        <div class="fun-facts-card">
+          <h2 class="fun-facts-title">
+            <span class="fun-icon">✨</span>
+            Curiosidades Fascinantes
+          </h2>
+          
+          <div class="fun-fact-item">
+            <span class="fact-bullet">🌍</span>
+            <p>A Terra é o único planeta do Sistema Solar cujo nome não vem da mitologia grega ou romana.</p>
+          </div>
+          
+          <div class="fun-fact-item">
+            <span class="fact-bullet">🔥</span>
+            <p>O núcleo interno da Terra é tão quente quanto a superfície do Sol (cerca de 5.500°C)!</p>
+          </div>
+          
+          <div class="fun-fact-item">
+            <span class="fact-bullet">🌊</span>
+            <p>Os oceanos contêm cerca de 96,5% de toda a água da Terra.</p>
+          </div>
+          
+          <div class="fun-fact-item">
+            <span class="fact-bullet">⚡</span>
+            <p>A Terra gera um campo magnético que nos protege das radiações solares nocivas.</p>
+          </div>
+          
+          <div class="fun-fact-item">
+            <span class="fact-bullet">🌳</span>
+            <p>Aproximadamente 71% da superfície terrestre é coberta por água, mas menos de 3% é água doce.</p>
+          </div>
+          
+          <div class="fun-fact-item">
+            <span class="fact-bullet">🚀</span>
+            <p>A Terra viaja pelo espaço a uma velocidade de aproximadamente 107.000 km/h ao redor do Sol!</p>
+          </div>
+
+          <div class="fun-fact-item">
+            <span class="fact-bullet">🌙</span>
+            <p>A Lua está se afastando da Terra cerca de 3,8 cm por ano.</p>
+          </div>
+
+          <div class="fun-fact-item">
+            <span class="fact-bullet">🧬</span>
+            <p>Existem mais de 8,7 milhões de espécies diferentes de organismos na Terra!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Earth Protection Message -->
+    <div class="row protection-section">
+      <div class="col-12 col-lg-8 mx-auto">
+        <div class="protection-card">
+          <div class="protection-icon">🌱</div>
+          <h2 class="protection-title">Proteja Nosso Planeta</h2>
+          <p class="protection-text">
+            A Terra é nosso único lar conhecido no vasto universo. É nossa responsabilidade cuidar 
+            deste planeta incrível para as gerações futuras. Pequenas ações fazem grande diferença!
+          </p>
+          <div class="protection-actions">
+            <span class="action-badge">♻️ Recicle</span>
+            <span class="action-badge">💧 Economize Água</span>
+            <span class="action-badge">🌳 Plante Árvores</span>
+            <span class="action-badge">⚡ Poupe Energia</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

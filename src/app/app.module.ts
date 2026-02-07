@@ -1,5 +1,8 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,12 +17,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MarsRoverComponent } from './components/mars-rover/mars-rover.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { EpicComponent } from './components/epic/epic.component';
+import { TranslatePipe } from './pipes/translate.pipe';
+
+registerLocaleData(localePt);
 
 
 @NgModule({
@@ -29,12 +36,15 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     NavbarComponent,
     HomeComponent,
     TerraComponent,
-    MarsRoverComponent
+    MarsRoverComponent,
+    EpicComponent,
+    TranslatePipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
     MatToolbarModule,
     MatIconModule,
     HttpClientModule,
@@ -46,7 +56,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatInputModule,
     MatSnackBarModule
   ],
-  providers: [DatePipe],
+  providers: [
+    DatePipe,
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

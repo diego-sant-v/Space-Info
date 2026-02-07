@@ -1,50 +1,174 @@
-<div class="container-fluid">
-  <iframe src="https://mars.nasa.gov/gltf_embed/24584" width="100%" height="450px" frameborder="0"></iframe>
-  <div class="row">
-    <div class="col-md-6 div_btns_rover">
-      <mat-form-field class="mat-field-date">
-        <mat-label>Insira uma data</mat-label>
-        <input (dateChange)="dateSelected = $event.value" matInput [matDatepicker]="picker">
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-
-      <mat-form-field>
-        <mat-label>Selecione a camerâ do rover</mat-label>
-        <mat-select (selectionChange)="typeCameraSelected = $event.value" [value]="typeCamera[5]">
-          <mat-option  *ngFor="let optionCamera of typeCamera" [value]="optionCamera">
-            {{optionCamera}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <div class="col-md-6">
-        <button (click)="getRoverPhotos(dateSelected)" class="btn btn-success float-right">Procurar Imagens</button>
+<div class="rover-container">
+  <div class="container-fluid">
+    <div class="row header-section">
+      <div class="col-12">
+        <h1 class="page-title">
+          <span class="title-icon">🤖</span>
+          Curiosity Rover - Explorador de Marte
+        </h1>
+        <p class="page-subtitle">
+          Explore as imagens capturadas pelo rover Curiosity em sua missão no Planeta Vermelho.
+        </p>
       </div>
-      
     </div>
-    
-  </div>
-  
-  <!-- <model-viewer src="../../../assets/curiosity_static.glb" alt="VR Headset" auto-rotate camera-controls ar ios-src="../../../assets/curiosity_static.glb"></model-viewer> -->
-  <div class="row">
-    <div *ngIf="isLoading" class="div_spinner">
-      <mat-spinner class="loading-spinner"></mat-spinner>
-    </div>
-  </div>
 
-  <div *ngIf="roverPhotosInfo" class="row text-center d-flex justify-content-center">
-    <div class="card mb-3 col-md-5 div_card_bk" *ngFor="let roverInfo of roverPhotosInfo.photos">
-      <div>
-        <img class="card-img-top" [src]="roverInfo.img_src" alt="Card image cap">
+    <div class="row model-section">
+      <div class="col-12">
+        <div class="model-card">
+          <div class="model-header">
+            <h3>🛸 Modelo 3D do Curiosity Rover</h3>
+            <p>Explore o rover em 3D abaixo</p>
+          </div>
+          <div class="iframe-wrapper">
+            <iframe 
+              src="https://mars.nasa.gov/gltf_embed/24584" 
+              frameborder="0"
+              allowfullscreen
+              loading="lazy">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row search-section">
+      <div class="col-12 col-lg-8 mx-auto">
+        <div class="search-card">
+          <div class="info-tip">
+            <span class="tip-icon">💡</span>
+            <p class="tip-text">
+              <strong>Dica:</strong> Nem todas as câmeras tiraram fotos em todas as datas. 
+              As câmeras NAVCAM, FHAZ e RHAZ têm mais fotos disponíveis. 
+              Tente datas recentes para melhores resultados!
+            </p>
+          </div>
+          
+          <div class="search-fields">
+            <mat-form-field appearance="outline" class="date-field">
+              <mat-label>📅 Data das Fotos</mat-label>
+              <input 
+                matInput 
+                [matDatepicker]="picker"
+                [(ngModel)]="dateSelected"
+                [max]="maxDate"
+                [min]="minDate"
+                placeholder="Selecione a data">
+              <mat-hint>Curiosity pousou em 06/08/2012</mat-hint>
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="camera-field">
+              <mat-label>📷 Câmera do Rover</mat-label>
+              <mat-select [(ngModel)]="typeCameraSelected">
+                <mat-option *ngFor="let optionCamera of typeCamera" [value]="optionCamera">
+                  {{ getCameraLabel(optionCamera) }}
+                </mat-option>
+              </mat-select>
+              <mat-hint>Selecione a câmera desejada</mat-hint>
+            </mat-form-field>
+          </div>
+
+          <button 
+            (click)="getRoverPhotos(dateSelected)" 
+            class="btn btn-success search-btn"
+            [disabled]="isLoading">
+            <span *ngIf="!isLoading">🔍 Buscar Fotos</span>
+            <span *ngIf="isLoading">Carregando...</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading-container">
+      <mat-spinner diameter="60"></mat-spinner>
+      <p class="loading-text">Baixando imagens de Marte...</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="hasError && !isLoading" class="error-state">
+      <div class="error-state-icon">⚠️</div>
+      <h3>Oops! Algo deu errado</h3>
+      <p>{{ errorMessage }}</p>
+      <button class="btn btn-primary" (click)="getRoverPhotos(dateSelected)">
+        🔄 Tentar Novamente
+      </button>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="!isLoading && !hasError && !hasSearched" class="empty-state">
+      <div class="empty-state-icon">🔭</div>
+      <h2>Pronto para explorar Marte?</h2>
+      <p>Selecione uma data e uma câmera acima para ver as incríveis fotos capturadas pelo Curiosity Rover.</p>
+    </div>
+
+    <!-- No Results State -->
+    <div *ngIf="!isLoading && !hasError && hasSearched && roverPhotosInfo?.photos?.length === 0" class="empty-state">
+      <div class="empty-state-icon">📷</div>
+      <h2>Nenhuma foto encontrada</h2>
+      <p>O Curiosity não tirou fotos com esta câmera nesta data. Tente outra combinação de data e câmera.</p>
+    </div>
+
+    <!-- Content -->
+    <div *ngIf="!isLoading && !hasError && roverPhotosInfo?.photos?.length > 0" class="row content-section">
+      <div class="results-header">
+        <h3>
+          <span class="results-icon">📸</span>
+          {{ roverPhotosInfo.photos.length }} foto(s) encontrada(s)
+        </h3>
       </div>
 
-      <div class="card-body">
-        <h5 class="card-title">{{roverInfo.camera.full_name}}</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.
-          This content is a little bit longer.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      <div class="col-12 col-sm-6 col-md-4 col-xl-3" *ngFor="let roverInfo of roverPhotosInfo.photos; let i = index">
+        <div class="photo-card">
+          <div class="image-wrapper">
+            <img 
+              [src]="roverInfo.img_src" 
+              [alt]="'Foto de ' + roverInfo.camera.full_name"
+              loading="lazy"
+              class="rover-image">
+            <div class="image-overlay">
+              <a [href]="roverInfo.img_src" target="_blank" class="view-full-btn">
+                🔍 Ver em tamanho real
+              </a>
+            </div>
+          </div>
+
+          <div class="photo-info">
+            <h5 class="camera-name">
+              📷 {{ roverInfo.camera.full_name }}
+            </h5>
+            
+            <div class="info-grid">
+              <div class="info-item">
+                <span class="info-label">🗓️ Data Terra:</span>
+                <span class="info-value">{{ roverInfo.earth_date | date: 'dd/MM/yyyy' }}</span>
+              </div>
+              
+              <div class="info-item">
+                <span class="info-label">🔴 Sol Marciano:</span>
+                <span class="info-value">{{ roverInfo.sol }}</span>
+              </div>
+              
+              <div class="info-item">
+                <span class="info-label">🎥 Câmera:</span>
+                <span class="info-value">{{ roverInfo.camera.name }}</span>
+              </div>
+              
+              <div class="info-item">
+                <span class="info-label">🤖 Rover:</span>
+                <span class="info-value">{{ roverInfo.rover.name }}</span>
+              </div>
+
+              <div class="info-item" *ngIf="roverInfo.rover.status">
+                <span class="info-label">📡 Status:</span>
+                <span class="info-value status-badge" [class.active]="roverInfo.rover.status === 'active'">
+                  {{ roverInfo.rover.status === 'active' ? '✅ Ativo' : '⏸️ Inativo' }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

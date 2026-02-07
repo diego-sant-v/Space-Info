@@ -4,12 +4,14 @@ import { AsteroidesComponent } from './components/asteroides/asteroides.componen
 import { HomeComponent } from './components/home/home.component';
 import { TerraComponent } from './components/terra/terra.component';
 import { MarsRoverComponent } from './components/mars-rover/mars-rover.component';
+import { EpicComponent } from './components/epic/epic.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'asteroides', component: AsteroidesComponent},
   {path: 'terra', component: TerraComponent},
   {path: 'curiosity-rover', component: MarsRoverComponent},
+  {path: 'epic', component: EpicComponent},
 ];
 
 @NgModule({

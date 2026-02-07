@@ -1,40 +1,117 @@
-<div class="container-fluid">
-    <div class="row">
-        <h1 class="text-center">Imagem do dia</h1>
+<div class="home-container">
+  <div class="container-fluid">
+    <div class="row header-section">
+      <div class="col-12">
+        <h1 class="page-title">
+          <span class="title-icon">🌌</span>
+          Imagem Astronômica do Dia
+        </h1>
+        <p class="page-subtitle">
+          Explore o cosmos! Cada dia uma imagem diferente do nosso fascinante universo.
+        </p>
       </div>
-    <div class="row">
-        <div class="row">
-            <div *ngIf="isLoading" class="div_spinner">
-              <mat-spinner class="loading-spinner"></mat-spinner>
-            </div>
-          </div>
-        
-          <div class="row text-center d-flex justify-content-center">
-            <div class="card mb-3 col-md-5 div_card_bk" *ngFor="let imageOfDay of infoImage">
-              <div>
-                <img class="card-img-top" [src]="imageOfDay.url" alt="Card image cap">
-              </div>
-        
-              <div class="card-body">
-                <h5 class="card-title">{{imageOfDay.title}}</h5>
-                <p class="card-text">{{imageOfDay.explanation}}</p>
-              </div>
-            </div>
-          </div>
     </div>
-    <!-- <div *ngIf="roverPhotosInfo" class="row text-center d-flex justify-content-center">
-        <div class="card mb-3 col-md-5 div_card_bk" *ngFor="let roverInfo of roverPhotosInfo.photos">
-          <div>
-            <img class="card-img-top" [src]="roverInfo.img_src" alt="Card image cap">
+
+    <div class="row search-section">
+      <div class="col-12 col-md-6 mx-auto">
+        <div class="date-picker-card">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>📅 Selecione uma data</mat-label>
+            <input 
+              matInput 
+              [matDatepicker]="picker"
+              [(ngModel)]="dateSelected"
+              [max]="maxDate"
+              [min]="minDate"
+              placeholder="Escolha uma data">
+            <mat-hint>Disponível desde 16 de junho de 1995</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <button 
+            (click)="getImageOfDayByDate(dateSelected)" 
+            class="btn btn-primary search-btn"
+            [disabled]="isLoading">
+            <span *ngIf="!isLoading">🔍 Buscar Imagem</span>
+            <span *ngIf="isLoading">Carregando...</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading-container">
+      <mat-spinner diameter="60"></mat-spinner>
+      <p class="loading-text">Buscando imagem do cosmos...</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="hasError && !isLoading" class="error-state">
+      <div class="error-state-icon">⚠️</div>
+      <h3>Oops! Algo deu errado</h3>
+      <p>{{ errorMessage }}</p>
+      <button class="btn btn-primary" (click)="getImageOfDayByDate(dateSelected)">
+        🔄 Tentar Novamente
+      </button>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="!isLoading && !hasError && infoImage.length === 0" class="empty-state">
+      <div class="empty-state-icon">🔭</div>
+      <h2>Nenhuma imagem selecionada</h2>
+      <p>Selecione uma data acima para ver a imagem astronômica do dia.</p>
+    </div>
+
+    <!-- Content -->
+    <div *ngIf="!isLoading && !hasError && infoImage.length > 0" class="row content-section">
+      <div class="col-12 col-lg-10 col-xl-8 mx-auto" *ngFor="let imageOfDay of infoImage">
+        <div class="image-card">
+          <div class="image-wrapper">
+            <img 
+              *ngIf="imageOfDay.media_type === 'image'"
+              class="apod-image" 
+              [src]="imageOfDay.url" 
+              [alt]="imageOfDay.title"
+              loading="lazy">
+            <iframe 
+              *ngIf="imageOfDay.media_type === 'video'"
+              class="apod-video"
+              [src]="imageOfDay.url"
+              frameborder="0"
+              allowfullscreen>
+            </iframe>
           </div>
-    
-          <div class="card-body">
-            <h5 class="card-title">{{roverInfo.camera.full_name}}</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.
-              This content is a little bit longer.</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+
+          <div class="image-content">
+            <div class="image-header">
+              <h2 class="image-title">{{ imageOfDay.title_pt || imageOfDay.title }}</h2>
+              <span class="image-date">
+                <span class="date-icon">📆</span>
+                {{ imageOfDay.date | date: 'dd/MM/yyyy' }}
+              </span>
+            </div>
+            
+            <p class="image-explanation">{{ imageOfDay.explanation_pt || imageOfDay.explanation }}</p>
+            
+            <div class="image-footer" *ngIf="imageOfDay.copyright">
+              <p class="copyright">
+                <strong>📷 Copyright:</strong> {{ imageOfDay.copyright }}
+              </p>
+            </div>
+
+            <div class="action-buttons">
+              <a 
+                *ngIf="imageOfDay.hdurl" 
+                [href]="imageOfDay.hdurl" 
+                target="_blank" 
+                class="btn btn-primary">
+                🖼️ Ver em Alta Resolução
+              </a>
+            </div>
           </div>
         </div>
-      </div> -->
+      </div>
+    </div>
+  </div>
 </div>
 

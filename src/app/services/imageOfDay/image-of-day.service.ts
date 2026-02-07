@@ -1,7 +1,8 @@
 import { DatePipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +18,34 @@ export class ImageOfDayService {
 
     if (dateSelectedFormated) {
       this.url = `https://api.nasa.gov/planetary/apod?start_date=${dateSelectedFormated}&api_key=${this.key}`;
-      return this.http.get(this.url);
+      return this.http.get(this.url).pipe(
+        catchError(this.handleError)
+      );
     } else {
-      // Lida com a transformação mal-sucedida (por exemplo, tratamento de erro)
-      throw new Error('Erro ao formatar datas');
+      return throwError(() => new Error('Erro ao formatar datas'));
     }
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = 'Ocorreu um erro desconhecido';
+    
+    if (error.error instanceof ErrorEvent) {
+      // Erro do lado do cliente
+      errorMessage = `Erro: ${error.error.message}`;
+    } else {
+      // Erro do lado do servidor
+      errorMessage = `Código do erro: ${error.status}\nMensagem: ${error.message}`;
+      
+      if (error.status === 0) {
+        errorMessage = 'Não foi possível conectar ao servidor. Verifique sua conexão.';
+      } else if (error.status === 429) {
+        errorMessage = 'Limite de requisições excedido. Tente novamente mais tarde.';
+      } else if (error.status === 403) {
+        errorMessage = 'Chave de API inválida ou acesso negado.';
+      }
+    }
+    
+    console.error(errorMessage);
+    return throwError(() => new Error(errorMessage));
   }
 }

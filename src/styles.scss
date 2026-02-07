@@ -1,4 +1,251 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+:root {
+  --primary-color: #1a1a2e;
+  --secondary-color: #16213e;
+  --accent-color: #0f3460;
+  --highlight-color: #e94560;
+  --space-blue: #533483;
+  --star-white: #f1f1f1;
+  --nebula-purple: #7b2cbf;
+  --deep-space: #0a0e27;
+}
+
+html, body { 
+  height: 100%; 
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body { 
+  font-family: 'Roboto', "Helvetica Neue", sans-serif;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--deep-space) 100%);
+  background-attachment: fixed;
+  color: var(--star-white);
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--primary-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--nebula-purple);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--highlight-color);
+}
+
+/* Estilos globais para cards */
+.card {
+  background: rgba(22, 33, 62, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(123, 44, 191, 0.3);
+  border-radius: 15px;
+  color: var(--star-white);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(123, 44, 191, 0.4);
+}
+
+.card-header {
+  background: rgba(15, 52, 96, 0.8);
+  border-bottom: 2px solid var(--nebula-purple);
+  color: var(--star-white);
+  font-weight: 600;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-title {
+  color: var(--star-white);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.card-text {
+  color: rgba(241, 241, 241, 0.9);
+  line-height: 1.6;
+}
+
+/* Botões */
+.btn {
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--nebula-purple) 0%, var(--space-blue) 100%);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #9d4edd 0%, #6a40a8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(123, 44, 191, 0.4);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+}
+
+.btn-success:hover {
+  background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+}
+
+.btn-outline-success {
+  border: 2px solid #10b981;
+  color: #10b981;
+  background: transparent;
+}
+
+.btn-outline-success:hover {
+  background: #10b981;
+  color: white;
+}
+
+/* Empty States */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  margin: 40px auto;
+  max-width: 500px;
+}
+
+.empty-state-icon {
+  font-size: 80px;
+  color: var(--nebula-purple);
+  margin-bottom: 20px;
+  opacity: 0.6;
+}
+
+.empty-state h2 {
+  color: var(--star-white);
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.empty-state p {
+  color: rgba(241, 241, 241, 0.7);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Loading States */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  padding: 40px;
+}
+
+.loading-text {
+  margin-top: 20px;
+  color: var(--nebula-purple);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* Error States */
+.error-state {
+  background: rgba(233, 69, 96, 0.1);
+  border: 2px solid var(--highlight-color);
+  border-radius: 12px;
+  padding: 30px;
+  margin: 30px auto;
+  max-width: 600px;
+  text-align: center;
+}
+
+.error-state-icon {
+  font-size: 60px;
+  color: var(--highlight-color);
+  margin-bottom: 15px;
+}
+
+.error-state h3 {
+  color: var(--highlight-color);
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.error-state p {
+  color: rgba(241, 241, 241, 0.8);
+  margin-bottom: 20px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .card-body {
+    padding: 1rem;
+  }
+  
+  .btn {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+  
+  .empty-state {
+    padding: 40px 15px;
+  }
+  
+  .empty-state-icon {
+    font-size: 60px;
+  }
+  
+  .empty-state h2 {
+    font-size: 20px;
+  }
+}
+
+/* Material Design overrides para tema espacial */
+.mat-mdc-form-field {
+  color: var(--star-white) !important;
+}
+
+.mat-mdc-text-field-wrapper {
+  background: rgba(22, 33, 62, 0.5) !important;
+  border-radius: 8px !important;
+}
+
+.mat-mdc-form-field-focus-overlay {
+  background-color: rgba(123, 44, 191, 0.2) !important;
+}
+
+.mat-mdc-select-value,
+.mat-mdc-input-element {
+  color: var(--star-white) !important;
+}
+
+.mat-mdc-progress-spinner circle {
+  stroke: var(--nebula-purple) !important;
+}

@@ -1,0 +1,148 @@
+<div class="epic-container">
+  <div class="container-fluid">
+    <div class="row header-section">
+      <div class="col-12">
+        <h1 class="page-title">
+          <span class="title-icon">🛰️</span>
+          EPIC - Terra do Espaço
+        </h1>
+        <p class="page-subtitle">
+          Earth Polychromatic Imaging Camera. Imagens da Terra capturadas pelo satélite DSCOVR a 1,5 milhão de km de distância!
+        </p>
+      </div>
+    </div>
+
+    <div class="row info-banner">
+      <div class="col-12 col-lg-10 mx-auto">
+        <div class="banner-card">
+          <div class="banner-icon">🌍</div>
+          <div class="banner-content">
+            <h3>Sobre o EPIC</h3>
+            <p>
+              A câmera EPIC está instalada no satélite DSCOVR, localizado no ponto de Lagrange L1 entre a Terra e o Sol. 
+              Ela captura imagens completas do lado iluminado da Terra a cada 1-2 horas, fornecendo uma visão única do nosso planeta azul.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row search-section">
+      <div class="col-12 col-md-6 mx-auto">
+        <div class="search-card">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>📅 Selecione uma data</mat-label>
+            <input 
+              matInput 
+              [matDatepicker]="picker"
+              [(ngModel)]="selectedDate"
+              [max]="maxDate"
+              [min]="minDate"
+              placeholder="Escolha uma data">
+            <mat-hint>Disponível desde 01/10/2015</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <button 
+            (click)="getImagesByDate(selectedDate!)" 
+            class="btn btn-primary search-btn"
+            [disabled]="isLoading || !selectedDate">
+            <span *ngIf="!isLoading">🔍 Buscar Imagens</span>
+            <span *ngIf="isLoading">Carregando...</span>
+          </button>
+          <button 
+            (click)="getLatestImages()" 
+            class="btn btn-success search-btn"
+            [disabled]="isLoading">
+            <span *ngIf="!isLoading">🌟 Ver Mais Recentes</span>
+            <span *ngIf="isLoading">Carregando...</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading-container">
+      <mat-spinner diameter="60"></mat-spinner>
+      <p class="loading-text">Baixando imagens do espaço...</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="hasError && !isLoading" class="error-state">
+      <div class="error-state-icon">⚠️</div>
+      <h3>Oops! Algo deu errado</h3>
+      <p>{{ errorMessage }}</p>
+      <button class="btn btn-primary" (click)="getLatestImages()">
+        🔄 Tentar Novamente
+      </button>
+    </div>
+
+    <!-- No Results State -->
+    <div *ngIf="!isLoading && !hasError && hasSearched && epicImages.length === 0" class="empty-state">
+      <div class="empty-state-icon">📷</div>
+      <h2>Nenhuma imagem encontrada</h2>
+      <p>Não foram encontradas imagens EPIC para esta data. O satélite pode estar em manutenção ou a data selecionada não possui registros.</p>
+    </div>
+
+    <!-- Content -->
+    <div *ngIf="!isLoading && !hasError && epicImages.length > 0" class="row content-section">
+      <div class="results-header">
+        <h3>
+          <span class="results-icon">🛰️</span>
+          {{ epicImages.length }} foto(s) da Terra
+        </h3>
+      </div>
+
+      <div class="col-12 col-sm-6 col-lg-4 col-xl-3" *ngFor="let image of epicImages; let i = index">
+        <div class="epic-card">
+          <div class="image-wrapper">
+            <img 
+              [src]="getImageUrl(image)" 
+              [alt]="'Terra ' + image.caption"
+              loading="lazy"
+              class="epic-image">
+            <div class="image-overlay">
+              <a [href]="getImageUrl(image)" target="_blank" class="view-full-btn">
+                🔍 Ver em tamanho real
+              </a>
+            </div>
+          </div>
+
+          <div class="epic-info">
+            <h5 class="image-caption">
+              🌍 {{ image.caption_pt || image.caption }}
+            </h5>
+            
+            <div class="info-grid">
+              <div class="info-item">
+                <span class="info-label">📅 Data:</span>
+                <span class="info-value">{{ image.date | date: 'dd/MM/yyyy HH:mm' }}</span>
+              </div>
+              
+              <div class="info-item">
+                <span class="info-label">📍 Coordenadas:</span>
+                <span class="info-value">{{ formatCoordinates(image.centroid_coordinates.lat, image.centroid_coordinates.lon) }}</span>
+              </div>
+              
+              <div class="info-item">
+                <span class="info-label">🌐 Ponto Central:</span>
+                <span class="info-value">
+                  <span *ngIf="image.centroid_coordinates.lat >= 0 && image.centroid_coordinates.lat <= 30 && image.centroid_coordinates.lon >= -30 && image.centroid_coordinates.lon <= 45">África</span>
+                  <span *ngIf="image.centroid_coordinates.lat >= 30 && image.centroid_coordinates.lon >= -30 && image.centroid_coordinates.lon <= 45">Europa</span>
+                  <span *ngIf="image.centroid_coordinates.lon < -30 && image.centroid_coordinates.lon > -130">Américas</span>
+                  <span *ngIf="image.centroid_coordinates.lon > 45 || image.centroid_coordinates.lon < -130">Ásia/Pacífico</span>
+                  <span *ngIf="!(image.centroid_coordinates.lat >= -90 && image.centroid_coordinates.lat <= 90)">Oceano</span>
+                </span>
+              </div>
+              
+              <div class="info-item">
+                <span class="info-label">📏 Versão:</span>
+                <span class="info-value">{{ image.version }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

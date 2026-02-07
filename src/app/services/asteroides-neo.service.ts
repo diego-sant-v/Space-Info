@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/internal/Observable';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
 import { DatePipe } from '@angular/common';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -25,10 +26,36 @@ export class AsteroidesNeoService {
 
     if (formattedStartDate && formattedEndDate) {
       this.url = `https://api.nasa.gov/neo/rest/v1/feed?start_date=${formattedStartDate}&end_date=${formattedEndDate}&api_key=${this.key}`;
-      return this.http.get(this.url);
+      return this.http.get(this.url).pipe(
+        catchError(this.handleError)
+      );
     } else {
-      // Lida com a transformação mal-sucedida (por exemplo, tratamento de erro)
-      throw new Error('Erro ao formatar datas');
+      return throwError(() => new Error('Erro ao formatar datas'));
     }
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = 'Ocorreu um erro desconhecido';
+    
+    if (error.error instanceof ErrorEvent) {
+      // Erro do lado do cliente
+      errorMessage = `Erro: ${error.error.message}`;
+    } else {
+      // Erro do lado do servidor
+      errorMessage = `Código do erro: ${error.status}\nMensagem: ${error.message}`;
+      
+      if (error.status === 0) {
+        errorMessage = 'Não foi possível conectar ao servidor. Verifique sua conexão.';
+      } else if (error.status === 429) {
+        errorMessage = 'Limite de requisições excedido. Tente novamente mais tarde.';
+      } else if (error.status === 403) {
+        errorMessage = 'Chave de API inválida ou acesso negado.';
+      } else if (error.status === 400) {
+        errorMessage = 'Intervalo de datas inválido. O máximo é 7 dias.';
+      }
+    }
+    
+    console.error(errorMessage);
+    return throwError(() => new Error(errorMessage));
   }
 }

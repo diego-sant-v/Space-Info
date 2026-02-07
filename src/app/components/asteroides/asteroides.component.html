@@ -1,77 +1,171 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="div_search_asteroides">
-          <button (click)="getAsteroidesByDate(startDateSelected, endDateSelected)" class="btn btn-success">Procurar Asteroides</button>
-            <mat-form-field>
-                <mat-label>Insira um intervalo de 7 dias</mat-label>
-                <mat-date-range-input [rangePicker]="picker">
-                  <input (dateChange)="startDateSelected = $event.value"  matStartDate placeholder="Start date">
-                  <input (dateChange)="endDateSelected = $event.value" matEndDate placeholder="End date">
-                </mat-date-range-input>
-                <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-date-range-picker #picker></mat-date-range-picker>
+<div class="asteroides-container">
+  <div class="container-fluid">
+    <div class="row header-section">
+      <div class="col-12">
+        <h1 class="page-title">
+          <span class="title-icon">☄️</span>
+          Asteroides Próximos da Terra
+        </h1>
+        <p class="page-subtitle">
+          Descubra asteroides que passaram perto da Terra. Sistema NeoWs da NASA.
+        </p>
+      </div>
+    </div>
+
+    <div class="row search-section">
+      <div class="col-12 col-lg-8 mx-auto">
+        <div class="search-card">
+          <div class="date-range-picker">
+            <mat-form-field appearance="outline" class="date-field">
+              <mat-label>📅 Data Inicial</mat-label>
+              <input 
+                matInput 
+                [matDatepicker]="pickerStart"
+                [(ngModel)]="startDateSelected"
+                [max]="maxDate"
+                placeholder="Selecione a data inicial">
+              <mat-datepicker-toggle matIconSuffix [for]="pickerStart"></mat-datepicker-toggle>
+              <mat-datepicker #pickerStart></mat-datepicker>
             </mat-form-field>
+
+            <mat-form-field appearance="outline" class="date-field">
+              <mat-label>📅 Data Final</mat-label>
+              <input 
+                matInput 
+                [matDatepicker]="pickerEnd"
+                [(ngModel)]="endDateSelected"
+                [max]="maxDate"
+                placeholder="Selecione a data final">
+              <mat-datepicker-toggle matIconSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+              <mat-datepicker #pickerEnd></mat-datepicker>
+            </mat-form-field>
+          </div>
+          
+          <p class="hint-text">⚠️ Intervalo máximo: 7 dias</p>
+          
+          <button 
+            (click)="getAsteroidesByDate(startDateSelected, endDateSelected)" 
+            class="btn btn-success search-btn"
+            [disabled]="isLoading">
+            <span *ngIf="!isLoading">🔍 Buscar Asteroides</span>
+            <span *ngIf="isLoading">Buscando...</span>
+          </button>
         </div>
+      </div>
     </div>
 
-    <div *ngIf="isLoading" class="div_spinner">
-      <mat-spinner class="loading-spinner"></mat-spinner>
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading-container">
+      <mat-spinner diameter="60"></mat-spinner>
+      <p class="loading-text">Procurando asteroides no espaço...</p>
     </div>
 
-    <div class="row">
-      <div class="col-md-6 col-xxl-3 col-xl-4 col-sm-6" *ngFor="let asteroidesInfo of asteroidesNear">
-        <div class="card card div_card_bk">
-          <h5 class="card-header">{{asteroidesInfo.name}}</h5>
-          <div class="card-body">
-            <h1 class="card-title">Nome: {{asteroidesInfo.name}}</h1>
-            <div class="div_infos">
-              <h1>Informações da data de aproximação:</h1>
-              <div *ngFor="let dataApproch of asteroidesInfo.close_approach_data">
-                  <h2>Data de aproximação:</h2>
-                  <h3>{{dataApproch.close_approach_date | date: 'dd/MM/yyyy'}}</h3>
+    <!-- Error State -->
+    <div *ngIf="hasError && !isLoading" class="error-state">
+      <div class="error-state-icon">⚠️</div>
+      <h3>Oops! Algo deu errado</h3>
+      <p>{{ errorMessage }}</p>
+      <button 
+        class="btn btn-primary" 
+        (click)="getAsteroidesByDate(startDateSelected, endDateSelected)">
+        🔄 Tentar Novamente
+      </button>
+    </div>
 
-                  <br>
+    <!-- Empty State -->
+    <div *ngIf="!isLoading && !hasError && !hasSearched" class="empty-state">
+      <div class="empty-state-icon">🔭</div>
+      <h2>Pronto para explorar?</h2>
+      <p>Selecione um intervalo de datas acima para descobrir quais asteroides passaram perto da Terra.</p>
+    </div>
 
-                  <h2>Distância(UA):</h2>
-                  <h3>{{dataApproch.miss_distance.astronomical}}</h3>
+    <!-- No Results State -->
+    <div *ngIf="!isLoading && !hasError && hasSearched && asteroidesNear.length === 0" class="empty-state">
+      <div class="empty-state-icon">🌌</div>
+      <h2>Nenhum asteroide encontrado</h2>
+      <p>Não foram encontrados asteroides próximos da Terra no período selecionado. Tente outro intervalo de datas.</p>
+    </div>
 
-                  <br>
+    <!-- Content -->
+    <div *ngIf="!isLoading && !hasError && asteroidesNear.length > 0" class="row content-section">
+      <div class="results-header">
+        <h3>
+          <span class="results-icon">☄️</span>
+          {{ asteroidesNear.length }} asteroide(s) encontrado(s)
+        </h3>
+      </div>
 
-                  <h2>Velocidade Relativa(KM):</h2>
-                  <h3>{{dataApproch.relative_velocity.kilometers_per_hour}}</h3>
+      <div class="col-12 col-sm-6 col-lg-4 col-xl-3" *ngFor="let asteroidesInfo of asteroidesNear">
+        <div class="asteroid-card" [class.hazardous]="asteroidesInfo.is_potentially_hazardous_asteroid">
+          <div class="card-header-custom">
+            <h5 class="asteroid-name">{{ asteroidesInfo.name }}</h5>
+            <span 
+              class="danger-badge" 
+              [ngClass]="getDangerClass(asteroidesInfo.is_potentially_hazardous_asteroid)">
+              {{ getDangerLabel(asteroidesInfo.is_potentially_hazardous_asteroid) }}
+            </span>
+          </div>
 
-                  <br>
-
-                  <h2>Corpo de Órbita:</h2>
-                  <h3>{{dataApproch.orbiting_body}}</h3>
-
+          <div class="card-body-custom">
+            <div class="info-section">
+              <h6 class="section-title">📏 Dimensões</h6>
+              <div class="info-grid">
+                <div class="info-item">
+                  <span class="info-label">Diâmetro estimado:</span>
+                  <span class="info-value">
+                    {{ asteroidesInfo.estimated_diameter?.kilometers?.estimated_diameter_min?.toFixed(2) || 'N/A' }} - 
+                    {{ asteroidesInfo.estimated_diameter?.kilometers?.estimated_diameter_max?.toFixed(2) || 'N/A' }} km
+                  </span>
+                </div>
               </div>
-              
-              <div>
-                <h2>Magnitude Absoluta:</h2>
-                <h3>{{asteroidesInfo.absolute_magnitude_h}}</h3>
-              </div>
-              
-
-              <div>
-                <h2>Potencialmente danoso:</h2>
-                <h3>{{asteroidesInfo.is_potentially_hazardous_asteroid}}</h3>
-              </div>
-              
-              <div>
-                <h2>Monitoramento de impacto:</h2>
-                <h3>{{asteroidesInfo.is_sentry_object}}</h3>
-              </div>
-
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
             </div>
-            
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+
+            <div class="info-section" *ngFor="let dataApproch of asteroidesInfo.close_approach_data">
+              <h6 class="section-title">🛸 Aproximação</h6>
+              <div class="info-grid">
+                <div class="info-item">
+                  <span class="info-label">📅 Data:</span>
+                  <span class="info-value">{{ dataApproch.close_approach_date | date: 'dd/MM/yyyy' }}</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">📍 Distância:</span>
+                  <span class="info-value">{{ dataApproch.miss_distance.kilometers | number:'1.0-0' }} km</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">⚡ Velocidade:</span>
+                  <span class="info-value">{{ dataApproch.relative_velocity.kilometers_per_hour | number:'1.0-0' }} km/h</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">🌍 Orbitando:</span>
+                  <span class="info-value">{{ dataApproch.orbiting_body }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="info-section">
+              <h6 class="section-title">📊 Dados Técnicos</h6>
+              <div class="info-grid">
+                <div class="info-item">
+                  <span class="info-label">💫 Magnitude:</span>
+                  <span class="info-value">{{ asteroidesInfo.absolute_magnitude_h }}</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">🎯 Monitoramento:</span>
+                  <span class="info-value">{{ asteroidesInfo.is_sentry_object ? '✅ Sim' : '❌ Não' }}</span>
+                </div>
+              </div>
+            </div>
+
+            <a 
+              [href]="asteroidesInfo.nasa_jpl_url" 
+              target="_blank" 
+              class="btn btn-primary btn-sm details-btn">
+              🔗 Ver mais detalhes
+            </a>
           </div>
         </div>
       </div>
     </div>
-    
+  </div>
 </div>
 
