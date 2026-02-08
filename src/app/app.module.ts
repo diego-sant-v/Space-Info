@@ -26,6 +26,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { EpicComponent } from './components/epic/epic.component';
 import { SpaceWeatherComponent } from './components/space-weather/space-weather.component';
 import { TranslatePipe } from './pipes/translate.pipe';
+import { IssTrackerComponent } from './components/iss-tracker/iss-tracker.component';
+import { SolarSystemComponent } from './components/solar-system/solar-system.component';
+import { StarMapComponent } from './components/star-map/star-map.component';
 
 registerLocaleData(localePt);
 
@@ -40,7 +43,10 @@ registerLocaleData(localePt);
     MarsRoverComponent,
     EpicComponent,
     SpaceWeatherComponent,
-    TranslatePipe
+    TranslatePipe,
+    IssTrackerComponent,
+    SolarSystemComponent,
+    StarMapComponent
   ],
   imports: [
     BrowserModule,

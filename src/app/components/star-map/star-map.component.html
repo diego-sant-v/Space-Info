@@ -1,0 +1,54 @@
+<div class="star-map-container">
+  <canvas #starCanvas class="star-canvas"></canvas>
+
+  <!-- Title -->
+  <div class="title-overlay">
+    <h1>✨ MAPA ESTELAR 3D</h1>
+    <p>Navegue pelo céu noturno e explore as constelações</p>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls-panel">
+    <button (click)="toggleConstellations()" [class.active]="showConstellations">
+      {{ showConstellations ? '⭐ Constelações' : '⚫ Constelações' }}
+    </button>
+    <button (click)="toggleGrid()" [class.active]="showGrid">
+      {{ showGrid ? '🔵 Grade celeste' : '⚫ Grade celeste' }}
+    </button>
+    <button (click)="toggleAutoRotate()" [class.active]="autoRotate">
+      {{ autoRotate ? '🔄 Rotação auto' : '⏹ Rotação auto' }}
+    </button>
+  </div>
+
+  <!-- Constellation sidebar -->
+  <div class="constellation-list">
+    <div class="list-title">CONSTELAÇÕES</div>
+    <div class="constellation-chip" *ngFor="let c of constellations"
+         (click)="selectConstellation(c)"
+         [class.selected]="selectedConstellation === c">
+      <span class="chip-name">{{ c.namePt }}</span>
+      <span class="chip-eng">{{ c.name }}</span>
+    </div>
+  </div>
+
+  <!-- Info panel -->
+  <div class="info-panel" *ngIf="selectedConstellation">
+    <div class="panel-header">
+      <h2>{{ selectedConstellation.namePt }}</h2>
+      <span class="subtitle">{{ selectedConstellation.name }}</span>
+      <button class="close-btn" (click)="closeInfo()">✕</button>
+    </div>
+    <p class="desc">{{ selectedConstellation.description }}</p>
+    <div class="star-count">
+      <span class="label">Estrelas principais:</span>
+      <span class="value">{{ selectedConstellation.stars.length }}</span>
+    </div>
+  </div>
+
+  <!-- Instructions -->
+  <div class="instructions">
+    <span>🖱 Arraste para olhar ao redor</span>
+    <span>🔍 Scroll para zoom</span>
+    <span>⭐ Selecione constelações</span>
+  </div>
+</div>

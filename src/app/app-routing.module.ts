@@ -6,6 +6,9 @@ import { TerraComponent } from './components/terra/terra.component';
 import { MarsRoverComponent } from './components/mars-rover/mars-rover.component';
 import { EpicComponent } from './components/epic/epic.component';
 import { SpaceWeatherComponent } from './components/space-weather/space-weather.component';
+import { IssTrackerComponent } from './components/iss-tracker/iss-tracker.component';
+import { SolarSystemComponent } from './components/solar-system/solar-system.component';
+import { StarMapComponent } from './components/star-map/star-map.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -14,6 +17,9 @@ const routes: Routes = [
   {path: 'curiosity-rover', component: MarsRoverComponent},
   {path: 'epic', component: EpicComponent},
   {path: 'clima-espacial', component: SpaceWeatherComponent},
+  {path: 'iss-tracker', component: IssTrackerComponent},
+  {path: 'sistema-solar', component: SolarSystemComponent},
+  {path: 'mapa-estelar', component: StarMapComponent},
 ];
 
 @NgModule({

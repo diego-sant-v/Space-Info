@@ -1,0 +1,107 @@
+<div class="iss-container">
+  <div class="container-fluid">
+
+    <!-- Header -->
+    <div class="row header-section">
+      <div class="col-12">
+        <h1 class="page-title">
+          <span class="title-icon iss-orbit">🛸</span>
+          Rastreador da ISS
+        </h1>
+        <p class="page-subtitle">
+          Rastreie a Estação Espacial Internacional em tempo real orbitando a Terra
+        </p>
+      </div>
+    </div>
+
+    <!-- 3D Globe + Info Panel -->
+    <div class="row content-row">
+      <div class="col-12 col-lg-8">
+        <div class="globe-wrapper">
+          <canvas #globeCanvas class="globe-canvas"></canvas>
+          <div class="globe-overlay-top">
+            <span class="live-badge">
+              <span class="live-dot"></span> AO VIVO
+            </span>
+          </div>
+          <div class="globe-overlay-bottom">
+            <span>🖱️ Arraste para rotacionar · Scroll para zoom</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-4">
+        <!-- ISS Info Panel -->
+        <div class="info-panel hud-border">
+          <div class="panel-title">📡 DADOS DA ISS</div>
+
+          <div class="data-row">
+            <span class="data-label">📍 Latitude</span>
+            <span class="data-value">{{ issData.latitude | number:'1.4-4' }}°</span>
+          </div>
+          <div class="data-row">
+            <span class="data-label">📍 Longitude</span>
+            <span class="data-value">{{ issData.longitude | number:'1.4-4' }}°</span>
+          </div>
+          <div class="data-row">
+            <span class="data-label">🔝 Altitude</span>
+            <span class="data-value">{{ issData.altitude | number:'1.1-1' }} km</span>
+          </div>
+          <div class="data-row">
+            <span class="data-label">🚀 Velocidade</span>
+            <span class="data-value highlight">{{ issData.velocity | number:'1.0-0' }} km/h</span>
+          </div>
+          <div class="data-row">
+            <span class="data-label">👁️ Visibilidade</span>
+            <span class="data-value" [class.daylight]="issData.visibility === 'daylight'" 
+                  [class.eclipsed]="issData.visibility === 'eclipsed'">
+              {{ issData.visibility === 'daylight' ? '☀️ Diurno' : '🌙 Eclipsado' }}
+            </span>
+          </div>
+        </div>
+
+        <!-- People in Space -->
+        <div class="info-panel hud-border people-panel">
+          <div class="panel-title">👨‍🚀 PESSOAS NO ESPAÇO: {{ peopleCount }}</div>
+          <div class="people-list">
+            <div class="person-item" *ngFor="let person of peopleInSpace">
+              <span class="person-icon">👨‍🚀</span>
+              <div class="person-info">
+                <span class="person-name">{{ person.name }}</span>
+                <span class="person-craft">{{ person.craft }}</span>
+              </div>
+            </div>
+            <div *ngIf="peopleInSpace.length === 0" class="no-data">
+              Carregando dados...
+            </div>
+          </div>
+        </div>
+
+        <!-- ISS Facts -->
+        <div class="info-panel hud-border">
+          <div class="panel-title">📊 SOBRE A ISS</div>
+          <div class="fact-item">
+            <span class="fact-label">Órbitas por dia</span>
+            <span class="fact-value">~15.5</span>
+          </div>
+          <div class="fact-item">
+            <span class="fact-label">Tempo por órbita</span>
+            <span class="fact-value">~92 min</span>
+          </div>
+          <div class="fact-item">
+            <span class="fact-label">Tripulação usual</span>
+            <span class="fact-value">6-7</span>
+          </div>
+          <div class="fact-item">
+            <span class="fact-label">Peso</span>
+            <span class="fact-value">~420.000 kg</span>
+          </div>
+          <div class="fact-item">
+            <span class="fact-label">Em órbita desde</span>
+            <span class="fact-value">1998</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<div class="solar-system-container">
+  <canvas #solarCanvas class="solar-canvas"></canvas>
+
+  <!-- Title -->
+  <div class="title-overlay">
+    <h1>☀️ SISTEMA SOLAR 3D</h1>
+    <p>Explore os planetas — clique para informações</p>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls-panel">
+    <div class="control-group">
+      <label>Velocidade:</label>
+      <button [class.active]="speedMultiplier === 0" (click)="setSpeed(0)">⏸</button>
+      <button [class.active]="speedMultiplier === 0.5 && !useRealSpeed" (click)="setSpeed(0.5)">0.5x</button>
+      <button [class.active]="speedMultiplier === 1 && !useRealSpeed" (click)="setSpeed(1)">1x</button>
+      <button [class.active]="speedMultiplier === 3" (click)="setSpeed(3)">3x</button>
+      <button [class.active]="speedMultiplier === 10" (click)="setSpeed(10)">10x</button>
+    </div>
+    <div class="control-group">
+      <button (click)="toggleRealSpeed()" [class.active]="useRealSpeed" class="real-speed-btn">
+        🌍 Real
+      </button>
+      <button (click)="toggleOrbits()" [class.active]="showOrbits">
+        {{ showOrbits ? '🔵 Órbitas' : '⚫ Órbitas' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Real speed info -->
+  <div class="real-speed-info" *ngIf="useRealSpeed">
+    <div class="scale-label">⏱ 1 segundo = {{ speedMultiplier }} dia{{ speedMultiplier !== 1 ? 's' : '' }}</div>
+    <div class="elapsed">Tempo simulado: <strong>{{ getElapsedTimeLabel() }}</strong></div>
+  </div>
+
+  <!-- Planet list -->
+  <div class="planet-list">
+    <div class="planet-chip" *ngFor="let planet of planets"
+         (click)="selectPlanet(planet)"
+         [class.selected]="selectedPlanet === planet">
+      {{ planet.namePt }}
+    </div>
+  </div>
+
+  <!-- Info panel -->
+  <div class="planet-info-panel" *ngIf="selectedPlanet" @fadeIn>
+    <div class="panel-header">
+      <h2>{{ selectedPlanet.namePt }}</h2>
+      <span class="planet-eng">{{ selectedPlanet.name }}</span>
+      <button class="close-btn" (click)="closePlanetInfo()">✕</button>
+    </div>
+    <p class="planet-desc">{{ selectedPlanet.description }}</p>
+    <div class="facts-grid">
+      <div class="fact-item" *ngFor="let fact of selectedPlanet.facts">
+        <span class="fact-label">{{ fact.label }}</span>
+        <span class="fact-value">{{ fact.value }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Instructions -->
+  <div class="instructions">
+    <span>🖱 Arraste para rotacionar</span>
+    <span>🔍 Scroll para zoom</span>
+    <span>👆 Clique nos planetas</span>
+  </div>
+</div>
