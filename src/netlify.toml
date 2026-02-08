@@ -1,9 +1,0 @@
-[build]
-  command = "npm run build"
-  publish = "spaceinformations"
-  
-[build.environment]
-  NODE_VERSION = "22"
-
-[[build.processing]]
-  skip_processing = false
