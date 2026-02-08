@@ -91,7 +91,7 @@ export class AsteroidesComponent implements OnInit {
   }
 
   getDangerLabel(isDangerous: boolean): string {
-    return isDangerous ? '⚠️ Sim' : '✅ Não';
+    return isDangerous ? 'Sim' : 'Não';
   }
 }
 

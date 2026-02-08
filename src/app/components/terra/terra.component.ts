@@ -8,73 +8,73 @@ import { Component, OnInit } from '@angular/core';
 export class TerraComponent implements OnInit {
   earthFacts = [
     {
-      icon: '🌍',
+      icon: 'public',
       title: 'Diâmetro',
       value: '12.742 km',
       description: 'Diâmetro equatorial da Terra'
     },
     {
-      icon: '⏱️',
+      icon: 'timer',
       title: 'Rotação',
       value: '23h 56min',
       description: 'Período de rotação (1 dia)'
     },
     {
-      icon: '🔄',
+      icon: 'sync',
       title: 'Translação',
       value: '365,25 dias',
       description: 'Período orbital (1 ano)'
     },
     {
-      icon: '🌡️',
+      icon: 'thermostat',
       title: 'Temperatura',
       value: '15°C',
       description: 'Temperatura média da superfície'
     },
     {
-      icon: '🌊',
+      icon: 'waves',
       title: 'Água',
       value: '71%',
       description: 'Superfície coberta por água'
     },
     {
-      icon: '☀️',
+      icon: 'wb_sunny',
       title: 'Distância do Sol',
       value: '149,6 milhões km',
       description: '1 Unidade Astronômica (UA)'
     },
     {
-      icon: '🌙',
+      icon: 'dark_mode',
       title: 'Satélites',
       value: '1 (Lua)',
       description: 'Satélite natural da Terra'
     },
     {
-      icon: '💪',
+      icon: 'fitness_center',
       title: 'Gravidade',
       value: '9,8 m/s²',
       description: 'Aceleração da gravidade'
     },
     {
-      icon: '🌬️',
+      icon: 'air',
       title: 'Atmosfera',
       value: '78% N2, 21% O2',
       description: 'Composição atmosférica principal'
     },
     {
-      icon: '🧠',
+      icon: 'psychology',
       title: 'Idade',
       value: '4,5 bilhões anos',
       description: 'Idade estimada da Terra'
     },
     {
-      icon: '👥',
+      icon: 'groups',
       title: 'População',
       value: '8 bilhões',
       description: 'População humana aproximada'
     },
     {
-      icon: '🏔️',
+      icon: 'terrain',
       title: 'Ponto mais alto',
       value: '8.848 m',
       description: 'Monte Everest'

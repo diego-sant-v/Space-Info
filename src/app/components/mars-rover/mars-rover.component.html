@@ -3,7 +3,7 @@
     <div class="row header-section">
       <div class="col-12">
         <h1 class="page-title">
-          <span class="title-icon">🤖</span>
+          <span class="title-icon"><mat-icon class="title-mat-icon">adb</mat-icon></span>
           Curiosity Rover - Explorador de Marte
         </h1>
         <p class="page-subtitle">
@@ -16,7 +16,7 @@
       <div class="col-12">
         <div class="model-card">
           <div class="model-header">
-            <h3>🛸 Modelo 3D do Curiosity Rover</h3>
+            <h3><mat-icon class="inline-icon">3d_rotation</mat-icon> Modelo 3D do Curiosity Rover</h3>
             <p>Explore o rover em 3D abaixo</p>
           </div>
           <div class="iframe-wrapper">
@@ -35,7 +35,7 @@
       <div class="col-12 col-lg-8 mx-auto">
         <div class="search-card">
           <div class="info-tip">
-            <span class="tip-icon">💡</span>
+            <span class="tip-icon"><mat-icon class="inline-icon">lightbulb</mat-icon></span>
             <p class="tip-text">
               <strong>Dica:</strong> Nem todas as câmeras tiraram fotos em todas as datas. 
               As câmeras NAVCAM, FHAZ e RHAZ têm mais fotos disponíveis. 
@@ -45,7 +45,7 @@
           
           <div class="search-fields">
             <mat-form-field appearance="outline" class="date-field">
-              <mat-label>📅 Data das Fotos</mat-label>
+              <mat-label><mat-icon class="label-icon">calendar_today</mat-icon> Data das Fotos</mat-label>
               <input 
                 matInput 
                 [matDatepicker]="picker"
@@ -59,7 +59,7 @@
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="camera-field">
-              <mat-label>📷 Câmera do Rover</mat-label>
+              <mat-label><mat-icon class="label-icon">photo_camera</mat-icon> Câmera do Rover</mat-label>
               <mat-select [(ngModel)]="typeCameraSelected">
                 <mat-option *ngFor="let optionCamera of typeCamera" [value]="optionCamera">
                   {{ getCameraLabel(optionCamera) }}
@@ -73,7 +73,7 @@
             (click)="getRoverPhotos(dateSelected)" 
             class="btn btn-success search-btn"
             [disabled]="isLoading">
-            <span *ngIf="!isLoading">🔍 Buscar Fotos</span>
+            <span *ngIf="!isLoading"><mat-icon class="btn-icon">search</mat-icon> Buscar Fotos</span>
             <span *ngIf="isLoading">Carregando...</span>
           </button>
         </div>
@@ -88,24 +88,24 @@
 
     <!-- Error State -->
     <div *ngIf="hasError && !isLoading" class="error-state">
-      <div class="error-state-icon">⚠️</div>
+      <div class="error-state-icon"><mat-icon class="banner-mat-icon">warning</mat-icon></div>
       <h3>Oops! Algo deu errado</h3>
       <p>{{ errorMessage }}</p>
       <button class="btn btn-primary" (click)="getRoverPhotos(dateSelected)">
-        🔄 Tentar Novamente
+        <mat-icon class="btn-icon">refresh</mat-icon> Tentar Novamente
       </button>
     </div>
 
     <!-- Empty State -->
     <div *ngIf="!isLoading && !hasError && !hasSearched" class="empty-state">
-      <div class="empty-state-icon">🔭</div>
+      <div class="empty-state-icon"><mat-icon class="banner-mat-icon">explore</mat-icon></div>
       <h2>Pronto para explorar Marte?</h2>
       <p>Selecione uma data e uma câmera acima para ver as incríveis fotos capturadas pelo Curiosity Rover.</p>
     </div>
 
     <!-- No Results State -->
     <div *ngIf="!isLoading && !hasError && hasSearched && roverPhotosInfo?.photos?.length === 0" class="empty-state">
-      <div class="empty-state-icon">📷</div>
+      <div class="empty-state-icon"><mat-icon class="banner-mat-icon">photo_camera</mat-icon></div>
       <h2>Nenhuma foto encontrada</h2>
       <p>O Curiosity não tirou fotos com esta câmera nesta data. Tente outra combinação de data e câmera.</p>
     </div>
@@ -114,7 +114,7 @@
     <div *ngIf="!isLoading && !hasError && roverPhotosInfo?.photos?.length > 0" class="row content-section">
       <div class="results-header">
         <h3>
-          <span class="results-icon">📸</span>
+          <span class="results-icon"><mat-icon class="inline-icon">camera</mat-icon></span>
           {{ roverPhotosInfo.photos.length }} foto(s) encontrada(s)
         </h3>
       </div>
@@ -129,41 +129,41 @@
               class="rover-image">
             <div class="image-overlay">
               <a [href]="roverInfo.img_src" target="_blank" class="view-full-btn">
-                🔍 Ver em tamanho real
+                <mat-icon class="btn-icon">search</mat-icon> Ver em tamanho real
               </a>
             </div>
           </div>
 
           <div class="photo-info">
             <h5 class="camera-name">
-              📷 {{ roverInfo.camera.full_name }}
+              <mat-icon class="inline-icon">photo_camera</mat-icon> {{ roverInfo.camera.full_name }}
             </h5>
             
             <div class="info-grid">
               <div class="info-item">
-                <span class="info-label">🗓️ Data Terra:</span>
+                <span class="info-label"><mat-icon class="label-icon">date_range</mat-icon> Data Terra:</span>
                 <span class="info-value">{{ roverInfo.earth_date | date: 'dd/MM/yyyy' }}</span>
               </div>
               
               <div class="info-item">
-                <span class="info-label">🔴 Sol Marciano:</span>
+                <span class="info-label"><mat-icon class="label-icon" style="color: #ff4444">circle</mat-icon> Sol Marciano:</span>
                 <span class="info-value">{{ roverInfo.sol }}</span>
               </div>
               
               <div class="info-item">
-                <span class="info-label">🎥 Câmera:</span>
+                <span class="info-label"><mat-icon class="label-icon">videocam</mat-icon> Câmera:</span>
                 <span class="info-value">{{ roverInfo.camera.name }}</span>
               </div>
               
               <div class="info-item">
-                <span class="info-label">🤖 Rover:</span>
+                <span class="info-label"><mat-icon class="label-icon">adb</mat-icon> Rover:</span>
                 <span class="info-value">{{ roverInfo.rover.name }}</span>
               </div>
 
               <div class="info-item" *ngIf="roverInfo.rover.status">
-                <span class="info-label">📡 Status:</span>
+                <span class="info-label"><mat-icon class="label-icon">satellite</mat-icon> Status:</span>
                 <span class="info-value status-badge" [class.active]="roverInfo.rover.status === 'active'">
-                  {{ roverInfo.rover.status === 'active' ? '✅ Ativo' : '⏸️ Inativo' }}
+                  {{ roverInfo.rover.status === 'active' ? 'Ativo' : 'Inativo' }}
                 </span>
               </div>
             </div>

@@ -3,7 +3,7 @@
     <div class="row header-section">
       <div class="col-12">
         <h1 class="page-title">
-          <span class="title-icon">🛰️</span>
+          <span class="title-icon"><mat-icon class="title-mat-icon">satellite_alt</mat-icon></span>
           EPIC - Terra do Espaço
         </h1>
         <p class="page-subtitle">
@@ -15,7 +15,7 @@
     <div class="row info-banner">
       <div class="col-12 col-lg-10 mx-auto">
         <div class="banner-card">
-          <div class="banner-icon">🌍</div>
+          <div class="banner-icon"><mat-icon class="banner-mat-icon">public</mat-icon></div>
           <div class="banner-content">
             <h3>Sobre o EPIC</h3>
             <p>
@@ -31,7 +31,7 @@
       <div class="col-12 col-md-6 mx-auto">
         <div class="search-card">
           <mat-form-field appearance="outline" class="full-width">
-            <mat-label>📅 Selecione uma data</mat-label>
+            <mat-label><mat-icon class="label-icon">calendar_today</mat-icon> Selecione uma data</mat-label>
             <input 
               matInput 
               [matDatepicker]="picker"
@@ -47,14 +47,14 @@
             (click)="getImagesByDate(selectedDate!)" 
             class="btn btn-primary search-btn"
             [disabled]="isLoading || !selectedDate">
-            <span *ngIf="!isLoading">🔍 Buscar Imagens</span>
+            <span *ngIf="!isLoading"><mat-icon class="btn-icon">search</mat-icon> Buscar Imagens</span>
             <span *ngIf="isLoading">Carregando...</span>
           </button>
           <button 
             (click)="getLatestImages()" 
             class="btn btn-success search-btn"
             [disabled]="isLoading">
-            <span *ngIf="!isLoading">🌟 Ver Mais Recentes</span>
+            <span *ngIf="!isLoading"><mat-icon class="btn-icon">stars</mat-icon> Ver Mais Recentes</span>
             <span *ngIf="isLoading">Carregando...</span>
           </button>
         </div>
@@ -69,17 +69,17 @@
 
     <!-- Error State -->
     <div *ngIf="hasError && !isLoading" class="error-state">
-      <div class="error-state-icon">⚠️</div>
+      <div class="error-state-icon"><mat-icon class="banner-mat-icon">warning</mat-icon></div>
       <h3>Oops! Algo deu errado</h3>
       <p>{{ errorMessage }}</p>
       <button class="btn btn-primary" (click)="getLatestImages()">
-        🔄 Tentar Novamente
+        <mat-icon class="btn-icon">refresh</mat-icon> Tentar Novamente
       </button>
     </div>
 
     <!-- No Results State -->
     <div *ngIf="!isLoading && !hasError && hasSearched && epicImages.length === 0" class="empty-state">
-      <div class="empty-state-icon">📷</div>
+      <div class="empty-state-icon"><mat-icon class="banner-mat-icon">photo_camera</mat-icon></div>
       <h2>Nenhuma imagem encontrada</h2>
       <p>Não foram encontradas imagens EPIC para esta data. O satélite pode estar em manutenção ou a data selecionada não possui registros.</p>
     </div>
@@ -88,7 +88,7 @@
     <div *ngIf="!isLoading && !hasError && epicImages.length > 0" class="row content-section">
       <div class="results-header">
         <h3>
-          <span class="results-icon">🛰️</span>
+          <span class="results-icon"><mat-icon class="inline-icon">satellite_alt</mat-icon></span>
           {{ epicImages.length }} foto(s) da Terra
         </h3>
       </div>
@@ -103,34 +103,34 @@
               class="epic-image">
             <div class="image-overlay">
               <a [href]="getImageUrl(image)" target="_blank" class="view-full-btn">
-                🔍 Ver em tamanho real
+                <mat-icon class="btn-icon">search</mat-icon> Ver em tamanho real
               </a>
             </div>
           </div>
 
           <div class="epic-info">
             <h5 class="image-caption">
-              🌍 {{ image.caption_pt || image.caption }}
+              <mat-icon class="inline-icon">public</mat-icon> {{ image.caption_pt || image.caption }}
             </h5>
             
             <div class="info-grid">
               <div class="info-item">
-                <span class="info-label">📅 Data:</span>
+                <span class="info-label"><mat-icon class="label-icon">event</mat-icon> Data:</span>
                 <span class="info-value">{{ image.date | date: 'dd/MM/yyyy HH:mm' }}</span>
               </div>
               
               <div class="info-item" *ngIf="image.centroid_coordinates">
-                <span class="info-label">📍 Coordenadas:</span>
+                <span class="info-label"><mat-icon class="label-icon">location_on</mat-icon> Coordenadas:</span>
                 <span class="info-value">{{ formatCoordinates(image.centroid_coordinates?.lat, image.centroid_coordinates?.lon) }}</span>
               </div>
               
               <div class="info-item" *ngIf="image.centroid_coordinates">
-                <span class="info-label">🌐 Ponto Central:</span>
+                <span class="info-label"><mat-icon class="label-icon">language</mat-icon> Ponto Central:</span>
                 <span class="info-value">{{ getRegionName(image.centroid_coordinates?.lat, image.centroid_coordinates?.lon) }}</span>
               </div>
               
               <div class="info-item">
-                <span class="info-label">📏 Versão:</span>
+                <span class="info-label"><mat-icon class="label-icon">straighten</mat-icon> Versão:</span>
                 <span class="info-value">{{ image.version }}</span>
               </div>
             </div>

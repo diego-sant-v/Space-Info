@@ -161,15 +161,15 @@ export class SpaceWeatherComponent implements OnInit {
 
   getOverallThreatLevel(): { level: string; color: string; icon: string } {
     if (this.maxKpIndex >= 7 || this.strongestFlare.startsWith('X')) {
-      return { level: 'ALTO', color: '#ff0040', icon: '🔴' };
+      return { level: 'ALTO', color: '#ff0040', icon: '●' };
     }
     if (this.maxKpIndex >= 5 || this.strongestFlare.startsWith('M')) {
-      return { level: 'MODERADO', color: '#ff8c00', icon: '🟠' };
+      return { level: 'MODERADO', color: '#ff8c00', icon: '●' };
     }
     if (this.totalEvents > 0) {
-      return { level: 'BAIXO', color: '#ffd700', icon: '🟡' };
+      return { level: 'BAIXO', color: '#ffd700', icon: '●' };
     }
-    return { level: 'CALMO', color: '#00ff88', icon: '🟢' };
+    return { level: 'CALMO', color: '#00ff88', icon: '●' };
   }
 
   setTab(tab: 'overview' | 'cme' | 'gst' | 'flares' | 'sep') {

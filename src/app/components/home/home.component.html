@@ -3,7 +3,7 @@
     <div class="row header-section">
       <div class="col-12">
         <h1 class="page-title">
-          <span class="title-icon">🌌</span>
+          <span class="title-icon"><mat-icon class="home-title-icon">blur_on</mat-icon></span>
           Imagem Astronômica do Dia
         </h1>
         <p class="page-subtitle">
@@ -16,7 +16,7 @@
       <div class="col-12 col-md-6 mx-auto">
         <div class="date-picker-card">
           <mat-form-field appearance="outline" class="full-width">
-            <mat-label>📅 Selecione uma data</mat-label>
+            <mat-label><mat-icon class="label-icon">calendar_today</mat-icon> Selecione uma data</mat-label>
             <input 
               matInput 
               [matDatepicker]="picker"
@@ -32,7 +32,7 @@
             (click)="getImageOfDayByDate(dateSelected)" 
             class="btn btn-primary search-btn"
             [disabled]="isLoading">
-            <span *ngIf="!isLoading">🔍 Buscar Imagem</span>
+            <span *ngIf="!isLoading"><mat-icon class="btn-icon">search</mat-icon> Buscar Imagem</span>
             <span *ngIf="isLoading">Carregando...</span>
           </button>
         </div>
@@ -47,17 +47,17 @@
 
     <!-- Error State -->
     <div *ngIf="hasError && !isLoading" class="error-state">
-      <div class="error-state-icon">⚠️</div>
+      <div class="error-state-icon"><mat-icon class="banner-mat-icon">warning</mat-icon></div>
       <h3>Oops! Algo deu errado</h3>
       <p>{{ errorMessage }}</p>
       <button class="btn btn-primary" (click)="getImageOfDayByDate(dateSelected)">
-        🔄 Tentar Novamente
+        <mat-icon class="btn-icon">refresh</mat-icon> Tentar Novamente
       </button>
     </div>
 
     <!-- Empty State -->
     <div *ngIf="!isLoading && !hasError && infoImage.length === 0" class="empty-state">
-      <div class="empty-state-icon">🔭</div>
+      <div class="empty-state-icon"><mat-icon class="banner-mat-icon">explore</mat-icon></div>
       <h2>Nenhuma imagem selecionada</h2>
       <p>Selecione uma data acima para ver a imagem astronômica do dia.</p>
     </div>
@@ -86,7 +86,7 @@
             <div class="image-header">
               <h2 class="image-title">{{ imageOfDay.title_pt || imageOfDay.title }}</h2>
               <span class="image-date">
-                <span class="date-icon">📆</span>
+                <span class="date-icon"><mat-icon class="inline-icon">event</mat-icon></span>
                 {{ imageOfDay.date | date: 'dd/MM/yyyy' }}
               </span>
             </div>
@@ -95,7 +95,7 @@
             
             <div class="image-footer" *ngIf="imageOfDay.copyright">
               <p class="copyright">
-                <strong>📷 Copyright:</strong> {{ imageOfDay.copyright }}
+                <strong><mat-icon class="inline-icon">photo_camera</mat-icon> Copyright:</strong> {{ imageOfDay.copyright }}
               </p>
             </div>
 
@@ -105,7 +105,7 @@
                 [href]="imageOfDay.hdurl" 
                 target="_blank" 
                 class="btn btn-primary">
-                🖼️ Ver em Alta Resolução
+                <mat-icon class="btn-icon">image</mat-icon> Ver em Alta Resolução
               </a>
             </div>
           </div>

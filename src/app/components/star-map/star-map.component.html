@@ -3,20 +3,20 @@
 
   <!-- Title -->
   <div class="title-overlay">
-    <h1>✨ MAPA ESTELAR 3D</h1>
+    <h1><mat-icon class="title-mat-icon">auto_awesome</mat-icon> MAPA ESTELAR 3D</h1>
     <p>Navegue pelo céu noturno e explore as constelações</p>
   </div>
 
   <!-- Controls -->
   <div class="controls-panel">
     <button (click)="toggleConstellations()" [class.active]="showConstellations">
-      {{ showConstellations ? '⭐ Constelações' : '⚫ Constelações' }}
+      <mat-icon class="btn-icon">{{ showConstellations ? 'star' : 'radio_button_unchecked' }}</mat-icon> Constelações
     </button>
     <button (click)="toggleGrid()" [class.active]="showGrid">
-      {{ showGrid ? '🔵 Grade celeste' : '⚫ Grade celeste' }}
+      <mat-icon class="btn-icon">{{ showGrid ? 'grid_on' : 'radio_button_unchecked' }}</mat-icon> Grade celeste
     </button>
     <button (click)="toggleAutoRotate()" [class.active]="autoRotate">
-      {{ autoRotate ? '🔄 Rotação auto' : '⏹ Rotação auto' }}
+      <mat-icon class="btn-icon">{{ autoRotate ? 'sync' : 'stop' }}</mat-icon> Rotação auto
     </button>
   </div>
 
@@ -47,8 +47,8 @@
 
   <!-- Instructions -->
   <div class="instructions">
-    <span>🖱 Arraste para olhar ao redor</span>
-    <span>🔍 Scroll para zoom</span>
-    <span>⭐ Selecione constelações</span>
+    <span><mat-icon class="inline-icon">mouse</mat-icon> Arraste para olhar ao redor</span>
+    <span><mat-icon class="inline-icon">search</mat-icon> Scroll para zoom</span>
+    <span><mat-icon class="inline-icon">star</mat-icon> Selecione constelações</span>
   </div>
 </div>

@@ -28,9 +28,30 @@
 .title-icon {
   font-size: 3rem;
   animation: float 3s ease-in-out infinite;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   
   @media (max-width: 768px) {
     font-size: 2.5rem;
+  }
+}
+
+.home-title-icon {
+  font-size: 3rem !important;
+  width: 3rem !important;
+  height: 3rem !important;
+  color: var(--star-white) !important;
+  background: linear-gradient(135deg, #7b2cbf, #00d4ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.5));
+
+  @media (max-width: 768px) {
+    font-size: 2.5rem !important;
+    width: 2.5rem !important;
+    height: 2.5rem !important;
   }
 }
 

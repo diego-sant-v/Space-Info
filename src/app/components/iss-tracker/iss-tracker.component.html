@@ -5,7 +5,7 @@
     <div class="row header-section">
       <div class="col-12">
         <h1 class="page-title">
-          <span class="title-icon iss-orbit">🛸</span>
+          <span class="title-icon iss-orbit"><mat-icon class="title-mat-icon">radar</mat-icon></span>
           Rastreador da ISS
         </h1>
         <p class="page-subtitle">
@@ -25,7 +25,7 @@
             </span>
           </div>
           <div class="globe-overlay-bottom">
-            <span>🖱️ Arraste para rotacionar · Scroll para zoom</span>
+            <span><mat-icon class="inline-icon">mouse</mat-icon> Arraste para rotacionar · Scroll para zoom</span>
           </div>
         </div>
       </div>
@@ -33,39 +33,40 @@
       <div class="col-12 col-lg-4">
         <!-- ISS Info Panel -->
         <div class="info-panel hud-border">
-          <div class="panel-title">📡 DADOS DA ISS</div>
+          <div class="panel-title"><mat-icon class="inline-icon">satellite</mat-icon> DADOS DA ISS</div>
 
           <div class="data-row">
-            <span class="data-label">📍 Latitude</span>
+            <span class="data-label"><mat-icon class="label-icon">location_on</mat-icon> Latitude</span>
             <span class="data-value">{{ issData.latitude | number:'1.4-4' }}°</span>
           </div>
           <div class="data-row">
-            <span class="data-label">📍 Longitude</span>
+            <span class="data-label"><mat-icon class="label-icon">location_on</mat-icon> Longitude</span>
             <span class="data-value">{{ issData.longitude | number:'1.4-4' }}°</span>
           </div>
           <div class="data-row">
-            <span class="data-label">🔝 Altitude</span>
+            <span class="data-label"><mat-icon class="label-icon">height</mat-icon> Altitude</span>
             <span class="data-value">{{ issData.altitude | number:'1.1-1' }} km</span>
           </div>
           <div class="data-row">
-            <span class="data-label">🚀 Velocidade</span>
+            <span class="data-label"><mat-icon class="label-icon">speed</mat-icon> Velocidade</span>
             <span class="data-value highlight">{{ issData.velocity | number:'1.0-0' }} km/h</span>
           </div>
           <div class="data-row">
-            <span class="data-label">👁️ Visibilidade</span>
+            <span class="data-label"><mat-icon class="label-icon">visibility</mat-icon> Visibilidade</span>
             <span class="data-value" [class.daylight]="issData.visibility === 'daylight'" 
                   [class.eclipsed]="issData.visibility === 'eclipsed'">
-              {{ issData.visibility === 'daylight' ? '☀️ Diurno' : '🌙 Eclipsado' }}
+              <mat-icon class="label-icon">{{ issData.visibility === 'daylight' ? 'light_mode' : 'dark_mode' }}</mat-icon>
+              {{ issData.visibility === 'daylight' ? 'Diurno' : 'Eclipsado' }}
             </span>
           </div>
         </div>
 
         <!-- People in Space -->
         <div class="info-panel hud-border people-panel">
-          <div class="panel-title">👨‍🚀 PESSOAS NO ESPAÇO: {{ peopleCount }}</div>
+          <div class="panel-title"><mat-icon class="inline-icon">groups</mat-icon> PESSOAS NO ESPAÇO: {{ peopleCount }}</div>
           <div class="people-list">
             <div class="person-item" *ngFor="let person of peopleInSpace">
-              <span class="person-icon">👨‍🚀</span>
+              <span class="person-icon"><mat-icon class="inline-icon">person</mat-icon></span>
               <div class="person-info">
                 <span class="person-name">{{ person.name }}</span>
                 <span class="person-craft">{{ person.craft }}</span>
@@ -79,7 +80,7 @@
 
         <!-- ISS Facts -->
         <div class="info-panel hud-border">
-          <div class="panel-title">📊 SOBRE A ISS</div>
+          <div class="panel-title"><mat-icon class="inline-icon">bar_chart</mat-icon> SOBRE A ISS</div>
           <div class="fact-item">
             <span class="fact-label">Órbitas por dia</span>
             <span class="fact-value">~15.5</span>

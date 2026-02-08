@@ -3,7 +3,7 @@
     <div class="row header-section">
       <div class="col-12">
         <h1 class="page-title">
-          <span class="title-icon">☄️</span>
+          <span class="title-icon"><mat-icon class="title-mat-icon">blur_on</mat-icon></span>
           Asteroides Próximos da Terra
         </h1>
         <p class="page-subtitle">
@@ -17,7 +17,7 @@
         <div class="search-card">
           <div class="date-range-picker">
             <mat-form-field appearance="outline" class="date-field">
-              <mat-label>📅 Data Inicial</mat-label>
+              <mat-label><mat-icon class="label-icon">calendar_today</mat-icon> Data Inicial</mat-label>
               <input 
                 matInput 
                 [matDatepicker]="pickerStart"
@@ -29,7 +29,7 @@
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="date-field">
-              <mat-label>📅 Data Final</mat-label>
+              <mat-label><mat-icon class="label-icon">calendar_today</mat-icon> Data Final</mat-label>
               <input 
                 matInput 
                 [matDatepicker]="pickerEnd"
@@ -41,13 +41,13 @@
             </mat-form-field>
           </div>
           
-          <p class="hint-text">⚠️ Intervalo máximo: 7 dias</p>
+          <p class="hint-text"><mat-icon class="inline-icon">warning</mat-icon> Intervalo máximo: 7 dias</p>
           
           <button 
             (click)="getAsteroidesByDate(startDateSelected, endDateSelected)" 
             class="btn btn-success search-btn"
             [disabled]="isLoading">
-            <span *ngIf="!isLoading">🔍 Buscar Asteroides</span>
+            <span *ngIf="!isLoading"><mat-icon class="btn-icon">search</mat-icon> Buscar Asteroides</span>
             <span *ngIf="isLoading">Buscando...</span>
           </button>
         </div>
@@ -62,19 +62,19 @@
 
     <!-- Error State -->
     <div *ngIf="hasError && !isLoading" class="error-state">
-      <div class="error-state-icon">⚠️</div>
+      <div class="error-state-icon"><mat-icon class="banner-mat-icon">warning</mat-icon></div>
       <h3>Oops! Algo deu errado</h3>
       <p>{{ errorMessage }}</p>
       <button 
         class="btn btn-primary" 
         (click)="getAsteroidesByDate(startDateSelected, endDateSelected)">
-        🔄 Tentar Novamente
+        <mat-icon class="btn-icon">refresh</mat-icon> Tentar Novamente
       </button>
     </div>
 
     <!-- Empty State -->
     <div *ngIf="!isLoading && !hasError && !hasSearched" class="empty-state">
-      <div class="empty-state-icon">🔭</div>
+      <div class="empty-state-icon"><mat-icon class="banner-mat-icon">explore</mat-icon></div>
       <h2>Pronto para explorar?</h2>
       <p>Selecione um intervalo de datas acima para descobrir quais asteroides passaram perto da Terra.</p>
     </div>
@@ -90,7 +90,7 @@
     <div *ngIf="!isLoading && !hasError && asteroidesNear.length > 0" class="row content-section">
       <div class="results-header">
         <h3>
-          <span class="results-icon">☄️</span>
+          <span class="results-icon"><mat-icon class="inline-icon">blur_on</mat-icon></span>
           {{ asteroidesNear.length }} asteroide(s) encontrado(s)
         </h3>
       </div>
@@ -108,7 +108,7 @@
 
           <div class="card-body-custom">
             <div class="info-section">
-              <h6 class="section-title">📏 Dimensões</h6>
+              <h6 class="section-title"><mat-icon class="inline-icon">straighten</mat-icon> Dimensões</h6>
               <div class="info-grid">
                 <div class="info-item">
                   <span class="info-label">Diâmetro estimado:</span>
@@ -121,37 +121,37 @@
             </div>
 
             <div class="info-section" *ngFor="let dataApproch of asteroidesInfo.close_approach_data">
-              <h6 class="section-title">🛸 Aproximação</h6>
+              <h6 class="section-title"><mat-icon class="inline-icon">radar</mat-icon> Aproximação</h6>
               <div class="info-grid">
                 <div class="info-item">
-                  <span class="info-label">📅 Data:</span>
+                  <span class="info-label"><mat-icon class="label-icon">event</mat-icon> Data:</span>
                   <span class="info-value">{{ dataApproch.close_approach_date | date: 'dd/MM/yyyy' }}</span>
                 </div>
                 <div class="info-item">
-                  <span class="info-label">📍 Distância:</span>
+                  <span class="info-label"><mat-icon class="label-icon">location_on</mat-icon> Distância:</span>
                   <span class="info-value">{{ dataApproch.miss_distance.kilometers | number:'1.0-0' }} km</span>
                 </div>
                 <div class="info-item">
-                  <span class="info-label">⚡ Velocidade:</span>
+                  <span class="info-label"><mat-icon class="label-icon">bolt</mat-icon> Velocidade:</span>
                   <span class="info-value">{{ dataApproch.relative_velocity.kilometers_per_hour | number:'1.0-0' }} km/h</span>
                 </div>
                 <div class="info-item">
-                  <span class="info-label">🌍 Orbitando:</span>
+                  <span class="info-label"><mat-icon class="label-icon">public</mat-icon> Orbitando:</span>
                   <span class="info-value">{{ dataApproch.orbiting_body }}</span>
                 </div>
               </div>
             </div>
 
             <div class="info-section">
-              <h6 class="section-title">📊 Dados Técnicos</h6>
+              <h6 class="section-title"><mat-icon class="inline-icon">bar_chart</mat-icon> Dados Técnicos</h6>
               <div class="info-grid">
                 <div class="info-item">
-                  <span class="info-label">💫 Magnitude:</span>
+                  <span class="info-label"><mat-icon class="label-icon">brightness_7</mat-icon> Magnitude:</span>
                   <span class="info-value">{{ asteroidesInfo.absolute_magnitude_h }}</span>
                 </div>
                 <div class="info-item">
-                  <span class="info-label">🎯 Monitoramento:</span>
-                  <span class="info-value">{{ asteroidesInfo.is_sentry_object ? '✅ Sim' : '❌ Não' }}</span>
+                  <span class="info-label"><mat-icon class="label-icon">gps_fixed</mat-icon> Monitoramento:</span>
+                  <span class="info-value">{{ asteroidesInfo.is_sentry_object ? 'Sim' : 'Não' }}</span>
                 </div>
               </div>
             </div>
@@ -160,7 +160,7 @@
               [href]="asteroidesInfo.nasa_jpl_url" 
               target="_blank" 
               class="btn btn-primary btn-sm details-btn">
-              🔗 Ver mais detalhes
+              <mat-icon class="btn-icon">link</mat-icon> Ver mais detalhes
             </a>
           </div>
         </div>

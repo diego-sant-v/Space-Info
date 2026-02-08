@@ -3,7 +3,7 @@
     <div class="row header-section">
       <div class="col-12">
         <h1 class="page-title">
-          <span class="title-icon">🌍</span>
+          <span class="title-icon"><mat-icon class="title-mat-icon">public</mat-icon></span>
           Nosso Planeta Terra
         </h1>
         <p class="page-subtitle">
@@ -23,7 +23,7 @@
               class="earth-banner-img"
               loading="lazy">
             <div class="image-overlay">
-              <h2 class="overlay-title">🌎 O Planeta Azul</h2>
+              <h2 class="overlay-title"><mat-icon class="title-mat-icon">public</mat-icon> O Planeta Azul</h2>
               <p class="overlay-text">A joia do Sistema Solar</p>
             </div>
           </div>
@@ -35,14 +35,14 @@
     <div class="row facts-section">
       <div class="col-12">
         <h2 class="section-title">
-          <span class="section-icon">📊</span>
+          <span class="section-icon"><mat-icon class="section-mat-icon">bar_chart</mat-icon></span>
           Dados Interessantes
         </h2>
       </div>
       
       <div class="col-12 col-sm-6 col-md-4 col-xl-3 mb-2" *ngFor="let fact of earthFacts">
         <div class="fact-card">
-          <div class="fact-icon">{{ fact.icon }}</div>
+          <div class="fact-icon"><mat-icon class="fact-mat-icon">{{ fact.icon }}</mat-icon></div>
           <h3 class="fact-title">{{ fact.title }}</h3>
           <div class="fact-value">{{ fact.value }}</div>
           <p class="fact-description">{{ fact.description }}</p>
@@ -54,7 +54,7 @@
     <div class="row layers-section">
       <div class="col-12">
         <h2 class="section-title">
-          <span class="section-icon">🧩</span>
+          <span class="section-icon"><mat-icon class="section-mat-icon">layers</mat-icon></span>
           Camadas da Terra
         </h2>
       </div>
@@ -67,7 +67,7 @@
             </div>
             <div class="layer-info">
               <h4 class="layer-name">{{ layer.name }}</h4>
-              <div class="layer-depth">📏 {{ layer.depth }}</div>
+              <div class="layer-depth"><mat-icon class="label-icon">straighten</mat-icon> {{ layer.depth }}</div>
               <p class="layer-description">{{ layer.description }}</p>
             </div>
           </div>
@@ -80,47 +80,47 @@
       <div class="col-12 col-lg-10 mx-auto">
         <div class="fun-facts-card">
           <h2 class="fun-facts-title">
-            <span class="fun-icon">✨</span>
+            <span class="fun-icon"><mat-icon class="section-mat-icon">auto_awesome</mat-icon></span>
             Curiosidades Fascinantes
           </h2>
           
           <div class="fun-fact-item">
-            <span class="fact-bullet">🌍</span>
+            <span class="fact-bullet"><mat-icon class="inline-icon">public</mat-icon></span>
             <p>A Terra é o único planeta do Sistema Solar cujo nome não vem da mitologia grega ou romana.</p>
           </div>
           
           <div class="fun-fact-item">
-            <span class="fact-bullet">🔥</span>
+            <span class="fact-bullet"><mat-icon class="inline-icon">local_fire_department</mat-icon></span>
             <p>O núcleo interno da Terra é tão quente quanto a superfície do Sol (cerca de 5.500°C)!</p>
           </div>
           
           <div class="fun-fact-item">
-            <span class="fact-bullet">🌊</span>
+            <span class="fact-bullet"><mat-icon class="inline-icon">waves</mat-icon></span>
             <p>Os oceanos contêm cerca de 96,5% de toda a água da Terra.</p>
           </div>
           
           <div class="fun-fact-item">
-            <span class="fact-bullet">⚡</span>
+            <span class="fact-bullet"><mat-icon class="inline-icon">bolt</mat-icon></span>
             <p>A Terra gera um campo magnético que nos protege das radiações solares nocivas.</p>
           </div>
           
           <div class="fun-fact-item">
-            <span class="fact-bullet">🌳</span>
+            <span class="fact-bullet"><mat-icon class="inline-icon">park</mat-icon></span>
             <p>Aproximadamente 71% da superfície terrestre é coberta por água, mas menos de 3% é água doce.</p>
           </div>
           
           <div class="fun-fact-item">
-            <span class="fact-bullet">🚀</span>
+            <span class="fact-bullet"><mat-icon class="inline-icon">speed</mat-icon></span>
             <p>A Terra viaja pelo espaço a uma velocidade de aproximadamente 107.000 km/h ao redor do Sol!</p>
           </div>
 
           <div class="fun-fact-item">
-            <span class="fact-bullet">🌙</span>
+            <span class="fact-bullet"><mat-icon class="inline-icon">dark_mode</mat-icon></span>
             <p>A Lua está se afastando da Terra cerca de 3,8 cm por ano.</p>
           </div>
 
           <div class="fun-fact-item">
-            <span class="fact-bullet">🧬</span>
+            <span class="fact-bullet"><mat-icon class="inline-icon">biotech</mat-icon></span>
             <p>Existem mais de 8,7 milhões de espécies diferentes de organismos na Terra!</p>
           </div>
         </div>
@@ -131,17 +131,17 @@
     <div class="row protection-section">
       <div class="col-12 col-lg-8 mx-auto">
         <div class="protection-card">
-          <div class="protection-icon">🌱</div>
+          <div class="protection-icon"><mat-icon class="banner-mat-icon">eco</mat-icon></div>
           <h2 class="protection-title">Proteja Nosso Planeta</h2>
           <p class="protection-text">
             A Terra é nosso único lar conhecido no vasto universo. É nossa responsabilidade cuidar 
             deste planeta incrível para as gerações futuras. Pequenas ações fazem grande diferença!
           </p>
           <div class="protection-actions">
-            <span class="action-badge">♻️ Recicle</span>
-            <span class="action-badge">💧 Economize Água</span>
-            <span class="action-badge">🌳 Plante Árvores</span>
-            <span class="action-badge">⚡ Poupe Energia</span>
+            <span class="action-badge"><mat-icon class="label-icon">recycling</mat-icon> Recicle</span>
+            <span class="action-badge"><mat-icon class="label-icon">water_drop</mat-icon> Economize Água</span>
+            <span class="action-badge"><mat-icon class="label-icon">park</mat-icon> Plante Árvores</span>
+            <span class="action-badge"><mat-icon class="label-icon">bolt</mat-icon> Poupe Energia</span>
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@
     <div class="row header-section">
       <div class="col-12">
         <h1 class="page-title">
-          <span class="title-icon sun-pulse">☀️</span>
+          <span class="title-icon sun-pulse"><mat-icon class="title-mat-icon">wb_sunny</mat-icon></span>
           Clima Espacial
         </h1>
         <p class="page-subtitle">
@@ -34,14 +34,14 @@
           <div class="hud-label">PAINEL DE BUSCA</div>
           <div class="date-row">
             <mat-form-field appearance="outline" class="date-field">
-              <mat-label>📅 Data inicial</mat-label>
+              <mat-label><mat-icon class="label-icon">calendar_today</mat-icon> Data inicial</mat-label>
               <input matInput [matDatepicker]="pickerStart" [(ngModel)]="startDate"
                      [max]="maxDate" [min]="minDate">
               <mat-datepicker-toggle matIconSuffix [for]="pickerStart"></mat-datepicker-toggle>
               <mat-datepicker #pickerStart></mat-datepicker>
             </mat-form-field>
             <mat-form-field appearance="outline" class="date-field">
-              <mat-label>📅 Data final</mat-label>
+              <mat-label><mat-icon class="label-icon">calendar_today</mat-icon> Data final</mat-label>
               <input matInput [matDatepicker]="pickerEnd" [(ngModel)]="endDate"
                      [max]="maxDate" [min]="minDate">
               <mat-datepicker-toggle matIconSuffix [for]="pickerEnd"></mat-datepicker-toggle>
@@ -49,7 +49,7 @@
             </mat-form-field>
           </div>
           <button (click)="searchWeather()" class="btn btn-primary scan-btn" [disabled]="isLoading">
-            <span *ngIf="!isLoading">⚡ ESCANEAR ATIVIDADE SOLAR</span>
+            <span *ngIf="!isLoading"><mat-icon class="btn-icon">bolt</mat-icon> ESCANEAR ATIVIDADE SOLAR</span>
             <span *ngIf="isLoading">ESCANEANDO...</span>
           </button>
         </div>
@@ -64,15 +64,15 @@
 
     <!-- Error -->
     <div *ngIf="hasError && !isLoading" class="error-state">
-      <div class="error-state-icon">⚠️</div>
+      <div class="error-state-icon"><mat-icon class="banner-mat-icon">warning</mat-icon></div>
       <h3>Falha na conexão com o satélite</h3>
       <p>{{ errorMessage }}</p>
-      <button class="btn btn-primary" (click)="searchWeather()">🔄 Reconectar</button>
+      <button class="btn btn-primary" (click)="searchWeather()"><mat-icon class="btn-icon">refresh</mat-icon> Reconectar</button>
     </div>
 
     <!-- Empty State -->
     <div *ngIf="!isLoading && !hasError && hasSearched && totalEvents === 0" class="empty-state">
-      <div class="empty-state-icon">🌤️</div>
+      <div class="empty-state-icon"><mat-icon class="banner-mat-icon">cloud</mat-icon></div>
       <h2>Espaço Calmo</h2>
       <p>Nenhum evento de clima espacial detectado neste período. O Sol estava tranquilo!</p>
     </div>
@@ -84,28 +84,28 @@
       <div class="row stats-dashboard">
         <div class="col-6 col-md-3">
           <div class="stat-card hud-border">
-            <div class="stat-icon">💥</div>
+            <div class="stat-icon"><mat-icon class="stat-mat-icon">flare</mat-icon></div>
             <div class="stat-value cyber-glow">{{ cmeEvents.length }}</div>
             <div class="stat-label">Ejeções Coronais</div>
           </div>
         </div>
         <div class="col-6 col-md-3">
           <div class="stat-card hud-border">
-            <div class="stat-icon">🌊</div>
+            <div class="stat-icon"><mat-icon class="stat-mat-icon">waves</mat-icon></div>
             <div class="stat-value cyber-glow">{{ gstEvents.length }}</div>
             <div class="stat-label">Tempestades Magnéticas</div>
           </div>
         </div>
         <div class="col-6 col-md-3">
           <div class="stat-card hud-border">
-            <div class="stat-icon">🔥</div>
+            <div class="stat-icon"><mat-icon class="stat-mat-icon">local_fire_department</mat-icon></div>
             <div class="stat-value cyber-glow">{{ flareEvents.length }}</div>
             <div class="stat-label">Explosões Solares</div>
           </div>
         </div>
         <div class="col-6 col-md-3">
           <div class="stat-card hud-border">
-            <div class="stat-icon">⚡</div>
+            <div class="stat-icon"><mat-icon class="stat-mat-icon">bolt</mat-icon></div>
             <div class="stat-value cyber-glow">{{ sepEvents.length }}</div>
             <div class="stat-label">Partículas Energéticas</div>
           </div>
@@ -117,7 +117,7 @@
         <div class="col-12 col-md-6" *ngIf="maxKpIndex > 0">
           <div class="info-panel hud-border">
             <div class="panel-header">
-              <span class="panel-icon">📊</span>
+              <span class="panel-icon"><mat-icon class="inline-icon">bar_chart</mat-icon></span>
               <span>Maior Índice Kp Registrado</span>
             </div>
             <div class="panel-body">
@@ -135,7 +135,7 @@
         <div class="col-12 col-md-6" *ngIf="strongestFlare">
           <div class="info-panel hud-border">
             <div class="panel-header">
-              <span class="panel-icon">☀️</span>
+              <span class="panel-icon"><mat-icon class="inline-icon">wb_sunny</mat-icon></span>
               <span>Explosão Solar Mais Forte</span>
             </div>
             <div class="panel-body">
@@ -152,11 +152,11 @@
       <!-- Tabs -->
       <div class="tabs-container">
         <div class="tab-buttons hud-border">
-          <button class="tab-btn" [class.active]="activeTab === 'overview'" (click)="setTab('overview')">📋 Visão Geral</button>
-          <button class="tab-btn" [class.active]="activeTab === 'cme'" (click)="setTab('cme')">💥 CME ({{ cmeEvents.length }})</button>
-          <button class="tab-btn" [class.active]="activeTab === 'gst'" (click)="setTab('gst')">🌊 Tempestades ({{ gstEvents.length }})</button>
-          <button class="tab-btn" [class.active]="activeTab === 'flares'" (click)="setTab('flares')">🔥 Flares ({{ flareEvents.length }})</button>
-          <button class="tab-btn" [class.active]="activeTab === 'sep'" (click)="setTab('sep')">⚡ SEP ({{ sepEvents.length }})</button>
+          <button class="tab-btn" [class.active]="activeTab === 'overview'" (click)="setTab('overview')"><mat-icon class="tab-icon">assignment</mat-icon> Visão Geral</button>
+          <button class="tab-btn" [class.active]="activeTab === 'cme'" (click)="setTab('cme')"><mat-icon class="tab-icon">flare</mat-icon> CME ({{ cmeEvents.length }})</button>
+          <button class="tab-btn" [class.active]="activeTab === 'gst'" (click)="setTab('gst')"><mat-icon class="tab-icon">waves</mat-icon> Tempestades ({{ gstEvents.length }})</button>
+          <button class="tab-btn" [class.active]="activeTab === 'flares'" (click)="setTab('flares')"><mat-icon class="tab-icon">local_fire_department</mat-icon> Flares ({{ flareEvents.length }})</button>
+          <button class="tab-btn" [class.active]="activeTab === 'sep'" (click)="setTab('sep')"><mat-icon class="tab-icon">bolt</mat-icon> SEP ({{ sepEvents.length }})</button>
         </div>
       </div>
 
@@ -167,7 +167,7 @@
           <div class="timeline-event" *ngFor="let event of cmeEvents.slice(0, 5)">
             <div class="event-marker cme-marker"></div>
             <div class="event-card hud-border">
-              <div class="event-type cme-type">💥 EJEÇÃO DE MASSA CORONAL</div>
+              <div class="event-type cme-type"><mat-icon class="inline-icon">flare</mat-icon> EJEÇÃO DE MASSA CORONAL</div>
               <div class="event-time">{{ event.startTime | date: 'dd/MM/yyyy HH:mm' }} UTC</div>
               <div class="event-detail" *ngIf="event.note">
                 <mat-spinner *ngIf="event.translating" diameter="16" class="inline-spinner"></mat-spinner>
@@ -196,7 +196,7 @@
           <div class="timeline-event" *ngFor="let event of flareEvents.slice(0, 5)">
             <div class="event-marker flare-marker"></div>
             <div class="event-card hud-border">
-              <div class="event-type flare-type">🔥 EXPLOSÃO SOLAR</div>
+              <div class="event-type flare-type"><mat-icon class="inline-icon">local_fire_department</mat-icon> EXPLOSÃO SOLAR</div>
               <div class="event-time">{{ event.beginTime | date: 'dd/MM/yyyy HH:mm' }} UTC</div>
               <div class="event-detail">
                 Classe: 
@@ -205,7 +205,7 @@
                 </span>
               </div>
               <div class="event-tags">
-                <span class="tag" *ngIf="event.sourceLocation">📍 {{ event.sourceLocation }}</span>
+                <span class="tag" *ngIf="event.sourceLocation"><mat-icon class="label-icon">location_on</mat-icon> {{ event.sourceLocation }}</span>
               </div>
             </div>
           </div>
@@ -217,24 +217,24 @@
         <div class="events-grid">
           <div class="event-detail-card hud-border" *ngFor="let event of cmeEvents">
             <div class="detail-header">
-              <span class="detail-icon">💥</span>
+              <span class="detail-icon"><mat-icon class="detail-mat-icon">flare</mat-icon></span>
               <span class="detail-title">Ejeção de Massa Coronal</span>
             </div>
             <div class="detail-body">
               <div class="detail-row">
-                <span class="detail-label">⏰ Início:</span>
+                <span class="detail-label"><mat-icon class="label-icon">schedule</mat-icon> Início:</span>
                 <span class="detail-value">{{ event.startTime | date: 'dd/MM/yyyy HH:mm' }} UTC</span>
               </div>
               <div class="detail-row" *ngIf="event.sourceLocation">
-                <span class="detail-label">📍 Origem:</span>
+                <span class="detail-label"><mat-icon class="label-icon">location_on</mat-icon> Origem:</span>
                 <span class="detail-value">{{ event.sourceLocation }}</span>
               </div>
               <div class="detail-row" *ngIf="event.cmeAnalyses && event.cmeAnalyses.length > 0">
-                <span class="detail-label">🚀 Velocidade:</span>
+                <span class="detail-label"><mat-icon class="label-icon">speed</mat-icon> Velocidade:</span>
                 <span class="detail-value">{{ event.cmeAnalyses[0].speed || 'N/A' }} km/s</span>
               </div>
               <div class="detail-row" *ngIf="event.cmeAnalyses && event.cmeAnalyses.length > 0">
-                <span class="detail-label">📐 Meia-largura:</span>
+                <span class="detail-label"><mat-icon class="label-icon">open_in_full</mat-icon> Meia-largura:</span>
                 <span class="detail-value">{{ event.cmeAnalyses[0].halfAngle || 'N/A' }}°</span>
               </div>
               <div class="detail-note" *ngIf="event.note">
@@ -252,12 +252,12 @@
         <div class="events-grid">
           <div class="event-detail-card hud-border" *ngFor="let event of gstEvents">
             <div class="detail-header">
-              <span class="detail-icon">🌊</span>
+              <span class="detail-icon"><mat-icon class="detail-mat-icon">waves</mat-icon></span>
               <span class="detail-title">Tempestade Geomagnética</span>
             </div>
             <div class="detail-body">
               <div class="detail-row">
-                <span class="detail-label">⏰ Início:</span>
+                <span class="detail-label"><mat-icon class="label-icon">schedule</mat-icon> Início:</span>
                 <span class="detail-value">{{ event.startTime | date: 'dd/MM/yyyy HH:mm' }} UTC</span>
               </div>
               <div *ngIf="event.allKpIndex && event.allKpIndex.length > 0">
@@ -284,7 +284,7 @@
         <div class="events-grid">
           <div class="event-detail-card hud-border" *ngFor="let event of flareEvents">
             <div class="detail-header" [style.border-left-color]="getFlareIntensity(event.classType).color">
-              <span class="detail-icon">🔥</span>
+              <span class="detail-icon"><mat-icon class="detail-mat-icon">local_fire_department</mat-icon></span>
               <span class="detail-title">Explosão Solar</span>
               <span class="flare-class-badge" [style.background]="getFlareIntensity(event.classType).color">
                 {{ event.classType || 'N/A' }}
@@ -292,19 +292,19 @@
             </div>
             <div class="detail-body">
               <div class="detail-row">
-                <span class="detail-label">⏰ Início:</span>
+                <span class="detail-label"><mat-icon class="label-icon">schedule</mat-icon> Início:</span>
                 <span class="detail-value">{{ event.beginTime | date: 'dd/MM/yyyy HH:mm' }} UTC</span>
               </div>
               <div class="detail-row" *ngIf="event.peakTime">
-                <span class="detail-label">📈 Pico:</span>
+                <span class="detail-label"><mat-icon class="label-icon">trending_up</mat-icon> Pico:</span>
                 <span class="detail-value">{{ event.peakTime | date: 'dd/MM/yyyy HH:mm' }} UTC</span>
               </div>
               <div class="detail-row" *ngIf="event.endTime">
-                <span class="detail-label">⏱️ Fim:</span>
+                <span class="detail-label"><mat-icon class="label-icon">timer</mat-icon> Fim:</span>
                 <span class="detail-value">{{ event.endTime | date: 'dd/MM/yyyy HH:mm' }} UTC</span>
               </div>
               <div class="detail-row" *ngIf="event.sourceLocation">
-                <span class="detail-label">📍 Origem:</span>
+                <span class="detail-label"><mat-icon class="label-icon">location_on</mat-icon> Origem:</span>
                 <span class="detail-value">{{ event.sourceLocation }}</span>
               </div>
               <div class="intensity-bar">
@@ -326,16 +326,16 @@
         <div class="events-grid">
           <div class="event-detail-card hud-border" *ngFor="let event of sepEvents">
             <div class="detail-header">
-              <span class="detail-icon">⚡</span>
+              <span class="detail-icon"><mat-icon class="detail-mat-icon">bolt</mat-icon></span>
               <span class="detail-title">Partículas Energéticas Solares</span>
             </div>
             <div class="detail-body">
               <div class="detail-row">
-                <span class="detail-label">⏰ Data:</span>
+                <span class="detail-label"><mat-icon class="label-icon">schedule</mat-icon> Data:</span>
                 <span class="detail-value">{{ event.eventTime | date: 'dd/MM/yyyy HH:mm' }} UTC</span>
               </div>
               <div class="detail-row" *ngIf="event.instruments && event.instruments.length > 0">
-                <span class="detail-label">🛰️ Instrumento:</span>
+                <span class="detail-label"><mat-icon class="label-icon">satellite_alt</mat-icon> Instrumento:</span>
                 <span class="detail-value">{{ event.instruments[0].displayName }}</span>
               </div>
             </div>

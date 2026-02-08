@@ -80,14 +80,14 @@ export class MarsRoverComponent implements OnInit {
 
   getCameraLabel(camera: TypePhotos): string {
     const labels: { [key in TypePhotos]: string } = {
-      [TypePhotos.FHAZ]: '🔻 FHAZ - Câmera Frontal',
-      [TypePhotos.RHAZ]: '🔻 RHAZ - Câmera Traseira',
-      [TypePhotos.CHEMCAM]: '🔬 CHEMCAM - Câmera Química',
-      [TypePhotos.MAHLI]: '📸 MAHLI - Lente de Mão',
-      [TypePhotos.MARDI]: '🛩️ MARDI - Descida',
-      [TypePhotos.NAVCAM]: '🧭 NAVCAM - Navegação',
-      [TypePhotos.PANCAM]: '📷 PANCAM - Câmera Panorâmica',
-      [TypePhotos.MINITES]: '🔍 MINITES - Mini-TES'
+      [TypePhotos.FHAZ]: 'FHAZ - Câmera Frontal',
+      [TypePhotos.RHAZ]: 'RHAZ - Câmera Traseira',
+      [TypePhotos.CHEMCAM]: 'CHEMCAM - Câmera Química',
+      [TypePhotos.MAHLI]: 'MAHLI - Lente de Mão',
+      [TypePhotos.MARDI]: 'MARDI - Descida',
+      [TypePhotos.NAVCAM]: 'NAVCAM - Navegação',
+      [TypePhotos.PANCAM]: 'PANCAM - Câmera Panorâmica',
+      [TypePhotos.MINITES]: 'MINITES - Mini-TES'
     };
     return labels[camera] || camera;
   }

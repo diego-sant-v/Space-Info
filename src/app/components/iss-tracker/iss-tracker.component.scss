@@ -23,7 +23,12 @@
   }
 }
 
-.title-icon { font-size: 3rem; }
+.title-icon {
+  font-size: 3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .iss-orbit {
   animation: orbit 3s linear infinite;

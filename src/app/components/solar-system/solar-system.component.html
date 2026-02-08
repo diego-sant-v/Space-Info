@@ -3,7 +3,7 @@
 
   <!-- Title -->
   <div class="title-overlay">
-    <h1>☀️ SISTEMA SOLAR 3D</h1>
+    <h1><mat-icon class="title-mat-icon">wb_sunny</mat-icon> SISTEMA SOLAR 3D</h1>
     <p>Explore os planetas — clique para informações</p>
   </div>
 
@@ -11,7 +11,7 @@
   <div class="controls-panel">
     <div class="control-group">
       <label>Velocidade:</label>
-      <button [class.active]="speedMultiplier === 0" (click)="setSpeed(0)">⏸</button>
+      <button [class.active]="speedMultiplier === 0" (click)="setSpeed(0)"><mat-icon class="btn-icon">pause</mat-icon></button>
       <button [class.active]="speedMultiplier === 0.5 && !useRealSpeed" (click)="setSpeed(0.5)">0.5x</button>
       <button [class.active]="speedMultiplier === 1 && !useRealSpeed" (click)="setSpeed(1)">1x</button>
       <button [class.active]="speedMultiplier === 3" (click)="setSpeed(3)">3x</button>
@@ -19,17 +19,17 @@
     </div>
     <div class="control-group">
       <button (click)="toggleRealSpeed()" [class.active]="useRealSpeed" class="real-speed-btn">
-        🌍 Real
+        <mat-icon class="btn-icon">public</mat-icon> Real
       </button>
       <button (click)="toggleOrbits()" [class.active]="showOrbits">
-        {{ showOrbits ? '🔵 Órbitas' : '⚫ Órbitas' }}
+        <mat-icon class="btn-icon">{{ showOrbits ? 'lens' : 'radio_button_unchecked' }}</mat-icon> Órbitas
       </button>
     </div>
   </div>
 
   <!-- Real speed info -->
   <div class="real-speed-info" *ngIf="useRealSpeed">
-    <div class="scale-label">⏱ 1 segundo = {{ speedMultiplier }} dia{{ speedMultiplier !== 1 ? 's' : '' }}</div>
+    <div class="scale-label"><mat-icon class="inline-icon">timer</mat-icon> 1 segundo = {{ speedMultiplier }} dia{{ speedMultiplier !== 1 ? 's' : '' }}</div>
     <div class="elapsed">Tempo simulado: <strong>{{ getElapsedTimeLabel() }}</strong></div>
   </div>
 
@@ -60,8 +60,8 @@
 
   <!-- Instructions -->
   <div class="instructions">
-    <span>🖱 Arraste para rotacionar</span>
-    <span>🔍 Scroll para zoom</span>
-    <span>👆 Clique nos planetas</span>
+    <span><mat-icon class="inline-icon">mouse</mat-icon> Arraste para rotacionar</span>
+    <span><mat-icon class="inline-icon">search</mat-icon> Scroll para zoom</span>
+    <span><mat-icon class="inline-icon">touch_app</mat-icon> Clique nos planetas</span>
   </div>
 </div>

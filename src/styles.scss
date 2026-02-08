@@ -251,3 +251,92 @@ body {
 .mat-mdc-progress-spinner circle {
   stroke: var(--nebula-purple) !important;
 }
+
+/* ===== Mat-icon utility classes ===== */
+.inline-icon,
+.btn-icon,
+.label-icon,
+.title-mat-icon,
+.banner-mat-icon,
+.tab-icon,
+.section-mat-icon,
+.fact-mat-icon,
+.stat-mat-icon,
+.detail-mat-icon,
+.nav-icon {
+  color: var(--star-white) !important;
+}
+
+.inline-icon {
+  font-size: 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+  vertical-align: middle;
+  margin-right: 2px;
+}
+
+.btn-icon {
+  font-size: 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+.label-icon {
+  font-size: 16px !important;
+  width: 16px !important;
+  height: 16px !important;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+.title-mat-icon {
+  font-size: 2.8rem !important;
+  width: 2.8rem !important;
+  height: 2.8rem !important;
+  vertical-align: middle;
+}
+
+.banner-mat-icon {
+  font-size: 48px !important;
+  width: 48px !important;
+  height: 48px !important;
+  vertical-align: middle;
+}
+
+.tab-icon {
+  font-size: 16px !important;
+  width: 16px !important;
+  height: 16px !important;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+.section-mat-icon {
+  font-size: 24px !important;
+  width: 24px !important;
+  height: 24px !important;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+.fact-mat-icon {
+  font-size: 2.5rem !important;
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+}
+
+.stat-mat-icon {
+  font-size: 2rem !important;
+  width: 2rem !important;
+  height: 2rem !important;
+}
+
+.detail-mat-icon {
+  font-size: 20px !important;
+  width: 20px !important;
+  height: 20px !important;
+  vertical-align: middle;
+  margin-right: 4px;
+}
