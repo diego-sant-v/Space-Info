@@ -119,20 +119,14 @@
                 <span class="info-value">{{ image.date | date: 'dd/MM/yyyy HH:mm' }}</span>
               </div>
               
-              <div class="info-item">
+              <div class="info-item" *ngIf="image.centroid_coordinates">
                 <span class="info-label">📍 Coordenadas:</span>
-                <span class="info-value">{{ formatCoordinates(image.centroid_coordinates.lat, image.centroid_coordinates.lon) }}</span>
+                <span class="info-value">{{ formatCoordinates(image.centroid_coordinates?.lat, image.centroid_coordinates?.lon) }}</span>
               </div>
               
-              <div class="info-item">
+              <div class="info-item" *ngIf="image.centroid_coordinates">
                 <span class="info-label">🌐 Ponto Central:</span>
-                <span class="info-value">
-                  <span *ngIf="image.centroid_coordinates.lat >= 0 && image.centroid_coordinates.lat <= 30 && image.centroid_coordinates.lon >= -30 && image.centroid_coordinates.lon <= 45">África</span>
-                  <span *ngIf="image.centroid_coordinates.lat >= 30 && image.centroid_coordinates.lon >= -30 && image.centroid_coordinates.lon <= 45">Europa</span>
-                  <span *ngIf="image.centroid_coordinates.lon < -30 && image.centroid_coordinates.lon > -130">Américas</span>
-                  <span *ngIf="image.centroid_coordinates.lon > 45 || image.centroid_coordinates.lon < -130">Ásia/Pacífico</span>
-                  <span *ngIf="!(image.centroid_coordinates.lat >= -90 && image.centroid_coordinates.lat <= 90)">Oceano</span>
-                </span>
+                <span class="info-value">{{ getRegionName(image.centroid_coordinates?.lat, image.centroid_coordinates?.lon) }}</span>
               </div>
               
               <div class="info-item">
