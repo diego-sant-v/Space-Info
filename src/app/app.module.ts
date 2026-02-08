@@ -24,6 +24,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { EpicComponent } from './components/epic/epic.component';
+import { SpaceWeatherComponent } from './components/space-weather/space-weather.component';
 import { TranslatePipe } from './pipes/translate.pipe';
 
 registerLocaleData(localePt);
@@ -38,6 +39,7 @@ registerLocaleData(localePt);
     TerraComponent,
     MarsRoverComponent,
     EpicComponent,
+    SpaceWeatherComponent,
     TranslatePipe
   ],
   imports: [

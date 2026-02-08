@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { EpicService } from '../../services/epic/epic.service';
 import { SnackbarService } from '../../services/components/snackbar.service';
 import { TranslateService } from 'src/app/services/translate/translate.service';
+import { timer } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-epic',
@@ -25,8 +27,6 @@ export class EpicComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // Carrega imagens do dia atual ao iniciar
-    this.getLatestImages();
   }
 
   getLatestImages() {
@@ -56,7 +56,7 @@ export class EpicComponent implements OnInit {
   }
 
   private tryPreviousDays(daysAgo: number) {
-    if (daysAgo > 5) {
+    if (daysAgo > 3) {
       this.isLoading = false;
       this.hasError = true;
       this.errorMessage = 'Não foi possível encontrar imagens recentes. Tente selecionar uma data manualmente.';
@@ -67,7 +67,10 @@ export class EpicComponent implements OnInit {
     const date = new Date();
     date.setDate(date.getDate() - daysAgo);
 
-    this.epicService.getEpicImagesByDate(date).subscribe({
+    // Adiciona delay de 2s entre tentativas para evitar rate limiting (503)
+    timer(2000).pipe(
+      switchMap(() => this.epicService.getEpicImagesByDate(date))
+    ).subscribe({
       next: (data) => {
         this.epicImages = Array.isArray(data) ? data : [];
         if (this.epicImages.length === 0) {

@@ -17,7 +17,7 @@ export class ImageOfDayService {
     const dateSelectedFormated = this.datePipe.transform(dateSelected,"yyyy-MM-dd");
 
     if (dateSelectedFormated) {
-      this.url = `https://api.nasa.gov/planetary/apod?start_date=${dateSelectedFormated}&api_key=${this.key}`;
+      this.url = `https://api.nasa.gov/planetary/apod?date=${dateSelectedFormated}&api_key=${this.key}`;
       return this.http.get(this.url).pipe(
         catchError(this.handleError)
       );
