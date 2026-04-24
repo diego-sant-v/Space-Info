@@ -9,6 +9,7 @@ import { SpaceWeatherComponent } from './components/space-weather/space-weather.
 import { IssTrackerComponent } from './components/iss-tracker/iss-tracker.component';
 import { SolarSystemComponent } from './components/solar-system/solar-system.component';
 import { StarMapComponent } from './components/star-map/star-map.component';
+import { UvConversionComponent } from './components/uv-conversion/uv-conversion.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: 'iss-tracker', component: IssTrackerComponent},
   {path: 'sistema-solar', component: SolarSystemComponent},
   {path: 'mapa-estelar', component: StarMapComponent},
+{path: 'uv-conversion', component: UvConversionComponent},
 ];
 
 @NgModule({

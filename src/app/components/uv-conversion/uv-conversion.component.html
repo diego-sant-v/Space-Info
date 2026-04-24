@@ -1,0 +1,163 @@
+<div class="uv-container">
+
+  <div class="hero-section">
+    <div class="hero-content">
+      <h1>
+        <mat-icon>wb_sunny</mat-icon>
+        Como transformar luz invisível em imagens?
+      </h1>
+      <p class="hero-subtitle">
+        O James Webb Telescope capta raios UV e infravermelhos - que nossos olhos não veem -
+        e os converte em imagens coloridas que podemos admirar.
+      </p>
+      <button class="btn-analogy" (click)="showSimplified = !showSimplified">
+        <mat-icon>psychology</mat-icon>
+        Ver explicação simplificada
+      </button>
+    </div>
+  </div>
+
+
+  <div class="simplified-explanation" *ngIf="showSimplified">
+    <div class="analogy-cards">
+      <div class="analogy-card">
+        <div class="analogy-icon">🎨</div>
+        <h3>O tabuleiro de xadrez (como a imagem é formada)</h3>
+        <p>Imagine um tabuleiro de xadrez onde cada casa representa um pedacinho do detector do telescópio.
+            A luz que chega do espaço preenche essas casas com intensidades diferentes — algumas mais fortes, outras mais fracas.
+            No final, todas essas casas juntas formam a imagem, como se cada uma fosse um pixel.</p>
+      </div>
+
+      <div class="analogy-card">
+        <div class="analogy-icon">📊</div>
+        <h3>A rádio com interferência (problemas nos dados)</h3>
+        <p>Agora pense em uma rádio com chiado ou duas estações misturadas.
+            É assim que os dados chegam: com interferências de raios cósmicos, falhas nos sensores e até distorções da própria luz.
+            Isso faz com que a imagem fique "bagunçada" antes de ser tratada.</p>
+      </div>
+
+      <div class="analogy-card">
+        <div class="analogy-icon">🧩</div>
+        <h3>Limpar e combinar fotos (como a imagem é melhorada)</h3>
+        <p>Primeiro, o sistema separa o sinal do ruído, como se filtrasse o que importa.
+            Depois, ajusta o foco corrigindo imperfeições.
+            Por fim, junta várias imagens tiradas em sequência para reduzir erros e revelar detalhes mais fracos, criando uma imagem final mais nítida.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="technical-section">
+    <button class="collapsible-btn" (click)="showTechnical = !showTechnical">
+      <mat-icon>{{ showTechnical ? 'expand_less' : 'expand_more' }}</mat-icon>
+      Para curiosos: explicação técnica detalhada
+    </button>
+
+    <div class="technical-content" *ngIf="showTechnical">
+      <div class="explanation-card">
+        <h2>🔬 Como funciona a conversão (versão técnica)?</h2>
+
+        <div class="tech-grid">
+          <div class="tech-item">
+            <h3>1. Introdução ao Processamento Digital de Sinais (DSP)</h3>
+            <p>O Processamento Digital de Sinais (DSP), utilizado para a reconstrução de radiações captadas no espaço profundo, é a base fundamental para a obtenção de imagens astronômicas complexas, sendo possível transformar registros fragmentados em representações visuais interpretáveis.</p>
+          </div>
+
+          <div class="tech-item">
+            <h3>2. O James Webb Space Telescope e sua Estrutura</h3>
+            <p>Atualmente, o James Webb Space Telescope (JWST) é o equipamento mais sofisticado e tecnológico para a captura de emissões na faixa do infravermelho. Para essa coleta, é necessário uma estrutura composta por um espelho primário, com 6,5 metros de diâmetro, dividido em 18 hexágonos compostos de berílio (Metal alcalino-terroso, com características de alta resistência, leve e com uma estabilidade térmica, excelente para aplicações espaciais).</p>
+          </div>
+
+          <div class="tech-item">
+            <h3>3. Conversão da Luz em Imagem Digital</h3>
+            <p>A coleta de dados por meio desse espelho ocorre por meio da conversão da luz para detectores que convertem a radiação em sinais elétricos organizados em matrizes digitais e convertidos em imagens em escala de intensidade. Para melhor entendimento, imagine um tabuleiro de xadrez, onde cada casa seria uma parte do detector semicondutor do James Webb, com a captação da luz imagine que cada casa tenha uma intensidade diferente e que cada peça está relacionada a uma intensidade, assim de acordo com a intensidade registrada naquela casa do tabuleiro, a peça específica será colocada, com isso temos a imagem na escala de intensidade, onde o tabuleiro são os pixels dessa imagem e as peças são o registro da intensidade.</p>
+          </div>
+
+          <div class="tech-item">
+            <h3>4. Interferências e Limitações na Coleta de Dados</h3>
+            <p>Um segundo aspecto neste estudo tem relação com as restrições na obtenção desses dados. Os dados brutos podem sofrer interferência por outros equipamentos ou raios cósmicos do próprio espaço, como quando você está ouvindo uma rádio e, por conta de uma frequência parecida, acaba por ouvir duas rádios ao mesmo tempo, bagunçando o sinal assim como os dados.
+                Também ocorrem por questões ópticas, como a difração (fenômeno ondulatório onde ondas contornam obstáculos ou se espalham ao passar por fendas) e o desalinhamento do espelho, por conta da movimentação mesmo que em escala nanométrica (10⁻⁹ metros).
+                Há também imperfeições nos sensores, como pixels defeituosos e baixa relação sinal-ruído (medida que compara a potência de um sinal desejado (informação) com a potência do ruído de fundo indesejado), que reduzem a qualidade e a confiabilidade das capturas.</p>
+          </div>
+
+          <div class="tech-item">
+            <h3>5. Mapeamento Cromático e Interpretação Científica</h3>
+            <p>São necessárias técnicas de mapeamento cromático para interpretação científica e pública, por meio dessa técnica é possível identificar a composição, temperatura, distância e movimento de corpos celestes.</p>
+          </div>
+
+          <div class="tech-item">
+            <h3>6. Filtragem com Transformada de Fourier</h3>
+            <p>Para contornar essas restrições, utilizam-se técnicas de filtragem baseadas na Transformada de Fourier para a remoção de ruídos correlacionais e modelagem do sinal de fundo. A Transformada de Fourier funciona como um separador super potente como se pegasse um leite com achocolatado e conseguisse separar o achocolatado do leite, separando então ruídos do sinal.</p>
+          </div>
+
+          <div class="tech-item">
+            <h3>7. Recuperação de Fase (Phase Retrieval)</h3>
+            <p>Com o sinal purificado, aplica-se a Recuperação de Fase (Phase Retrieval) para corrigir distorções ópticas causadas pelo desalinhamento dos segmentos e restaurar a nitidez do foco, na prática eles tiram uma foto de uma estrela extremamente brilhante e já sabem o resultado perfeito que deveria ocorrer, assim qualquer borrão nessa imagem indica um desalinhamento; por meio de uma tentativa e erro direcionada por contas matemáticas, vai se capturando imagens até que o resultado esperado seja atingido.</p>
+          </div>
+
+          <div class="tech-item">
+            <h3>8. Dithering e Empilhamento de Imagens (Image Stacking)</h3>
+            <p>Na sequência, integra-se o Dithering ao Empilhamento de Imagens (Image Stacking) para mitigar pixels defeituosos e elevar a relação sinal-ruído, revelando detalhes de brilho fraco. isso ocorre tirando não uma foto, mas algumas fotos do universo e, no intervalo dessas fotos, se movimenta o telescópio, assim se calcula uma média das intensidades adquiridas por cada pixel, por meio do alinhamento manual com base em algum astro presente nas fotos contornando eventual falha de captação de um pixel.</p>
+          </div>
+
+          <div class="tech-item">
+            <h3>9. Representação Final por Mapeamento Cromático (RGB)</h3>
+            <p>Por fim pega-se todas essas informações adquiridas e por meio do comprimento de ondas do infravermelho, cria-se uma representação fidedigna e didaticamente acessível por meio da atribuição de cores visíveis do Mapeamento Cromático (RGB).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Galeria de imagens -->
+  <div class="gallery-section">
+    <div class="gallery-header">
+      <h2>✨ Galeria do James Webb</h2>
+      <p>Imagens reais convertidas de radiação invisível para visível</p>
+    </div>
+
+    <div *ngIf="isLoading" class="loading-container">
+      <mat-spinner diameter="60"></mat-spinner>
+      <p>Buscando imagens do espaço profundo... 🌌</p>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-state">
+      <mat-icon>satellite_alt</mat-icon>
+      <h3>Ops! Não conseguimos contato com o telescópio</h3>
+      <p>{{ errorMessage }}</p>
+      <button mat-raised-button (click)="loadImages()">
+        <mat-icon>refresh</mat-icon>
+        Tentar novamente
+      </button>
+    </div>
+
+    <div class="gallery-grid">
+      <div *ngFor="let image of images" class="image-card">
+        <div class="card-image-wrapper">
+          <img [src]="sanitizeUrl(image.url)" [alt]="image.title" (error)="handleImageError(image)">
+          <div class="card-badge">JWST</div>
+        </div>
+        <div class="card-content">
+          <h3>{{ image.title }}</h3>
+          <p class="card-description">{{ (image.explanation || image.description) | slice:0:120 }}...</p>
+          <div class="card-meta">
+            <span class="meta-item">
+              <mat-icon>event</mat-icon>
+              {{ (image.date || image.release_date) | date:'yyyy' }}
+            </span>
+            <span class="meta-item" *ngIf="image.instrument">
+              <mat-icon>science</mat-icon>
+              {{ image.instrument }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Estado vazio -->
+    <div *ngIf="!isLoading && !errorMessage && images.length === 0" class="empty-state">
+      <mat-icon>photo_library</mat-icon>
+      <p>Nenhuma imagem encontrada. Verifique a conexão com a API.</p>
+      <button mat-raised-button (click)="loadImages()">Recarregar</button>
+    </div>
+  </div>
+</div>
