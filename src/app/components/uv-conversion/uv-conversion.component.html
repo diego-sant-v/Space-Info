@@ -109,55 +109,59 @@
   </div>
 
   <!-- Galeria de imagens -->
-  <div class="gallery-section">
-    <div class="gallery-header">
-      <h2>✨ Galeria do James Webb</h2>
-      <p>Imagens reais convertidas de radiação invisível para visível</p>
-    </div>
+<div class="gallery-section">
+  <div class="gallery-header">
+    <h2>✨ Galeria do James Webb</h2>
+    <p>Imagens reais convertidas de radiação invisível para visível</p>
+  </div>
 
-    <div *ngIf="isLoading" class="loading-container">
-      <mat-spinner diameter="60"></mat-spinner>
-      <p>Buscando imagens do espaço profundo... 🌌</p>
-    </div>
+  <div *ngIf="isLoading" class="loading-container">
+    <mat-spinner diameter="60"></mat-spinner>
+    <p>Explorando o cosmos com o James Webb... 🔭</p>
+  </div>
 
-    <div *ngIf="errorMessage" class="error-state">
-      <mat-icon>satellite_alt</mat-icon>
-      <h3>Ops! Não conseguimos contato com o telescópio</h3>
-      <p>{{ errorMessage }}</p>
-      <button mat-raised-button (click)="loadImages()">
-        <mat-icon>refresh</mat-icon>
-        Tentar novamente
-      </button>
-    </div>
+  <div *ngIf="errorMessage" class="error-state">
+    <mat-icon>satellite_alt</mat-icon>
+    <h3>Ops! Não conseguimos contato com o telescópio</h3>
+    <p>{{ errorMessage }}</p>
+    <button mat-raised-button (click)="loadImages()">
+      <mat-icon>refresh</mat-icon>
+      Tentar novamente
+    </button>
+  </div>
 
-    <div class="gallery-grid">
-      <div *ngFor="let image of images" class="image-card">
-        <div class="card-image-wrapper">
-          <img [src]="sanitizeUrl(image.url)" [alt]="image.title" (error)="handleImageError(image)">
-          <div class="card-badge">JWST</div>
-        </div>
-        <div class="card-content">
-          <h3>{{ image.title }}</h3>
-          <p class="card-description">{{ (image.explanation || image.description) | slice:0:120 }}...</p>
-          <div class="card-meta">
-            <span class="meta-item">
-              <mat-icon>event</mat-icon>
-              {{ (image.date || image.release_date) | date:'yyyy' }}
-            </span>
-            <span class="meta-item" *ngIf="image.instrument">
-              <mat-icon>science</mat-icon>
-              {{ image.instrument }}
-            </span>
-          </div>
+  <div class="gallery-grid">
+    <div *ngFor="let image of images" class="image-card">
+      <div class="card-image-wrapper">
+        <img [src]="sanitizeUrl(image.location)" [alt]="image.program || 'Imagem JWST'" (error)="handleImageError(image)">
+        <div class="card-badge">JWST</div>
+      </div>
+      <div class="card-content">
+        <h3>{{ image.program || 'Programa Científico' }}</h3>
+        <p class="card-description">
+          <strong>ID:</strong> {{ image.id }}<br>
+          <strong>Data:</strong> {{ image.date || 'Não especificada' }}<br>
+          <strong>Tipo:</strong> {{ image.type || 'JPG' }}
+        </p>
+        <div class="card-meta">
+          <span class="meta-item">
+            <mat-icon>science</mat-icon>
+            {{ image.instrument || 'NIRCam' }}
+          </span>
+          <span class="meta-item" *ngIf="image.filter">
+            <mat-icon>tune</mat-icon>
+            {{ image.filter }}
+          </span>
         </div>
       </div>
     </div>
-
-    <!-- Estado vazio -->
-    <div *ngIf="!isLoading && !errorMessage && images.length === 0" class="empty-state">
-      <mat-icon>photo_library</mat-icon>
-      <p>Nenhuma imagem encontrada. Verifique a conexão com a API.</p>
-      <button mat-raised-button (click)="loadImages()">Recarregar</button>
-    </div>
   </div>
+
+  <!-- Estado vazio -->
+  <div *ngIf="!isLoading && !errorMessage && images.length === 0" class="empty-state">
+    <mat-icon>photo_library</mat-icon>
+    <p>Nenhuma imagem encontrada. Verifique a conexão com a API.</p>
+    <button mat-raised-button (click)="loadImages()">Recarregar</button>
+  </div>
+</div>
 </div>
