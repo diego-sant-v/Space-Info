@@ -1,0 +1,27 @@
+<div class="black-hole-container">
+  <canvas #blackHoleCanvas class="black-hole-canvas"></canvas>
+
+  <div class="loading-overlay" *ngIf="loading">
+    <mat-spinner diameter="48" color="warn"></mat-spinner>
+    <span>Simulando curvatura do espaço-tempo...</span>
+  </div>
+
+  <!-- Title -->
+  <div class="title-overlay">
+    <h1><mat-icon class="title-mat-icon">blur_circular</mat-icon> BURACO NEGRO</h1>
+    <p>Simulação de lente gravitacional e disco de acreção em tempo real</p>
+  </div>
+
+  <!-- Instructions -->
+  <div class="instructions">
+    <span><mat-icon class="inline-icon">mouse</mat-icon> Arraste para orbitar</span>
+    <span><mat-icon class="inline-icon">search</mat-icon> Scroll para zoom</span>
+  </div>
+
+  <!-- Sound toggle -->
+  <label class="sound-toggle">
+    <input type="checkbox" [(ngModel)]="soundEnabled" (change)="onSoundToggle()" />
+    <mat-icon class="inline-icon">{{ soundEnabled ? 'volume_up' : 'volume_off' }}</mat-icon>
+    <span>Som do buraco negro</span>
+  </label>
+</div>

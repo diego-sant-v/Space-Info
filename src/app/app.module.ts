@@ -29,6 +29,8 @@ import { TranslatePipe } from './pipes/translate.pipe';
 import { IssTrackerComponent } from './components/iss-tracker/iss-tracker.component';
 import { SolarSystemComponent } from './components/solar-system/solar-system.component';
 import { StarMapComponent } from './components/star-map/star-map.component';
+import { BlackHoleComponent } from './components/simulations/black-hole/black-hole.component';
+import { QuasarComponent } from './components/simulations/quasar/quasar.component';
 
 registerLocaleData(localePt);
 
@@ -46,7 +48,9 @@ registerLocaleData(localePt);
     TranslatePipe,
     IssTrackerComponent,
     SolarSystemComponent,
-    StarMapComponent
+    StarMapComponent,
+    BlackHoleComponent,
+    QuasarComponent
   ],
   imports: [
     BrowserModule,

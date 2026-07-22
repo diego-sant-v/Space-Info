@@ -17,6 +17,18 @@
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" routerLink="black-hole" routerLinkActive="active">
+            <mat-icon class="nav-icon">blur_circular</mat-icon>
+            <span>Buraco Negro</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="quasar" routerLinkActive="active">
+            <mat-icon class="nav-icon">bolt</mat-icon>
+            <span>Quasar</span>
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" routerLink="uv-conversion" routerLinkActive="active">
             <mat-icon class="nav-icon">satellite_alt</mat-icon>
             <span>James Webb</span>
@@ -46,30 +58,39 @@
             <span>Mapa Estelar</span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="clima-espacial" routerLinkActive="active">
-            <mat-icon class="nav-icon">wb_sunny</mat-icon>
-            <span>Clima Espacial</span>
+        <li class="nav-item dropdown" [class.show]="isExploreOpen">
+          <a class="nav-link dropdown-toggle" href="javascript:void(0)"
+             (click)="toggleExplore()" [class.active]="isExploreOpen">
+            <mat-icon class="nav-icon">explore</mat-icon>
+            <span>Explorar</span>
           </a>
+          <ul class="dropdown-menu space-dropdown" [class.show]="isExploreOpen">
+            <li>
+              <a class="dropdown-item" routerLink="clima-espacial" routerLinkActive="active" (click)="closeExplore()">
+                <mat-icon class="nav-icon">wb_sunny</mat-icon>
+                <span>Clima Espacial</span>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="asteroides" routerLinkActive="active" (click)="closeExplore()">
+                <mat-icon class="nav-icon">blur_on</mat-icon>
+                <span>Asteroides</span>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="epic" routerLinkActive="active" (click)="closeExplore()">
+                <mat-icon class="nav-icon">satellite_alt</mat-icon>
+                <span>EPIC</span>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="terra" routerLinkActive="active" (click)="closeExplore()">
+                <mat-icon class="nav-icon">public</mat-icon>
+                <span>Terra</span>
+              </a>
+            </li>
+          </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="asteroides" routerLinkActive="active">
-            <mat-icon class="nav-icon">blur_on</mat-icon>
-            <span>Asteroides</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="epic" routerLinkActive="active">
-            <mat-icon class="nav-icon">satellite_alt</mat-icon>
-            <span>EPIC</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="terra" routerLinkActive="active">
-            <mat-icon class="nav-icon">public</mat-icon>
-            <span>Terra</span>
-          </a>
-          </li>
       </ul>
     </div>
   </div>

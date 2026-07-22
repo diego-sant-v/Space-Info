@@ -10,6 +10,8 @@ import { IssTrackerComponent } from './components/iss-tracker/iss-tracker.compon
 import { SolarSystemComponent } from './components/solar-system/solar-system.component';
 import { StarMapComponent } from './components/star-map/star-map.component';
 import { UvConversionComponent } from './components/uv-conversion/uv-conversion.component';
+import { BlackHoleComponent } from './components/simulations/black-hole/black-hole.component';
+import { QuasarComponent } from './components/simulations/quasar/quasar.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -21,7 +23,9 @@ const routes: Routes = [
   {path: 'iss-tracker', component: IssTrackerComponent},
   {path: 'sistema-solar', component: SolarSystemComponent},
   {path: 'mapa-estelar', component: StarMapComponent},
-{path: 'uv-conversion', component: UvConversionComponent},
+  {path: 'uv-conversion', component: UvConversionComponent},
+  {path: 'black-hole', component: BlackHoleComponent},
+  {path: 'quasar', component: QuasarComponent},
 ];
 
 @NgModule({

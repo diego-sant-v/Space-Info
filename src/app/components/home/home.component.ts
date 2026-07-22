@@ -21,6 +21,45 @@ export class HomeComponent implements OnInit {
   maxDate: Date = new Date();
   minDate: Date = new Date('1995-06-16'); // Data de início da APOD
 
+  // Recursos recém-adicionados ao site, exibidos na seção "Novidades"
+  newFeatures = [
+    {
+      title: 'Quasar',
+      description: 'Núcleo galáctico ativo com jatos relativísticos e disco de acreção superaquecido, com som ambiente.',
+      icon: 'bolt',
+      route: '/quasar',
+      accent: '#5d8bff'
+    },
+    {
+      title: 'Buraco Negro',
+      description: 'Simulação 3D de lente gravitacional e disco de acreção, com som ambiente.',
+      icon: 'blur_circular',
+      route: '/black-hole',
+      accent: '#ff8a4c'
+    },
+    {
+      title: 'Rastreador da ISS',
+      description: 'Acompanhe a Estação Espacial Internacional orbitando a Terra em tempo real.',
+      icon: 'radar',
+      route: '/iss-tracker',
+      accent: '#00ff88'
+    },
+    {
+      title: 'Mapa Estelar 3D',
+      description: 'Navegue pelo céu noturno e explore constelações interativamente.',
+      icon: 'auto_awesome',
+      route: '/mapa-estelar',
+      accent: '#aabbff'
+    },
+    {
+      title: 'Sistema Solar',
+      description: 'Explore os planetas e suas órbitas em uma simulação 3D interativa.',
+      icon: 'public',
+      route: '/sistema-solar',
+      accent: '#ffcc00'
+    }
+  ];
+
   constructor(
     private imageOfDayService: ImageOfDayService, 
     private datePipe: DatePipe,

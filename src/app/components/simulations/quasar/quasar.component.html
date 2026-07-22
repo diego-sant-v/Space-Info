@@ -1,0 +1,27 @@
+<div class="quasar-container">
+  <canvas #quasarCanvas class="quasar-canvas"></canvas>
+
+  <div class="loading-overlay" *ngIf="loading">
+    <mat-spinner diameter="48" color="warn"></mat-spinner>
+    <span>Ligando o motor central do quasar...</span>
+  </div>
+
+  <!-- Title -->
+  <div class="title-overlay">
+    <h1><mat-icon class="title-mat-icon">bolt</mat-icon> QUASAR</h1>
+    <p>Núcleo galáctico ativo: disco de acreção superaquecido e jatos relativísticos</p>
+  </div>
+
+  <!-- Instructions -->
+  <div class="instructions">
+    <span><mat-icon class="inline-icon">mouse</mat-icon> Arraste para orbitar</span>
+    <span><mat-icon class="inline-icon">search</mat-icon> Scroll para zoom</span>
+  </div>
+
+  <!-- Sound toggle -->
+  <label class="sound-toggle">
+    <input type="checkbox" [(ngModel)]="soundEnabled" (change)="onSoundToggle()" />
+    <mat-icon class="inline-icon">{{ soundEnabled ? 'volume_up' : 'volume_off' }}</mat-icon>
+    <span>Som do quasar</span>
+  </label>
+</div>

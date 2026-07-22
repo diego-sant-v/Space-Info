@@ -1,5 +1,27 @@
 <div class="home-container">
   <div class="container-fluid">
+
+    <!-- Novidades -->
+    <div class="row novelties-section">
+      <div class="col-12">
+        <div class="novelties-header">
+          <h2 class="section-title">
+            <mat-icon class="section-title-icon">fiber_new</mat-icon> Novidades
+          </h2>
+          <p class="section-subtitle">Os recursos mais recentes adicionados ao Space Info</p>
+        </div>
+        <div class="novelty-cards">
+          <a class="novelty-card" *ngFor="let feature of newFeatures" [routerLink]="feature.route"
+             [style.--accent]="feature.accent">
+            <span class="novelty-badge">Novo</span>
+            <div class="novelty-icon"><mat-icon>{{ feature.icon }}</mat-icon></div>
+            <h3>{{ feature.title }}</h3>
+            <p>{{ feature.description }}</p>
+          </a>
+        </div>
+      </div>
+    </div>
+
     <div class="row header-section">
       <div class="col-12">
         <h1 class="page-title">
